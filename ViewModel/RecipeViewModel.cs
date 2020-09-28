@@ -46,5 +46,10 @@ namespace CookingBook.ViewModel
             this.Ingridients = JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
             this.Instructions = JsonConvert.DeserializeObject<List<InstructionViewModel>>(recipe.SerializedInstructions);
         }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

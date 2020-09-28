@@ -49,11 +49,12 @@ namespace CookingBook
                 this.listBoxIngridients.Items.Add(box);
             }
 
-            foreach (RecipeViewModel recipeView in (this.DataContext as CookingBookViewModel).FilteredRecipes)
-            {
-                ListBoxItem item = new ListBoxItem() { Content = recipeView.Name };
-                this.listBoxFilteredRecipes.Items.Add(item);
-            }
+            //foreach (RecipeViewModel recipeView in (this.DataContext as CookingBookViewModel).FilteredRecipes)
+            //{
+
+            //    ListBoxItem item = new ListBoxItem() { Content = recipeView.Name };
+            //    this.listBoxFilteredRecipes.Items.Add(item);
+            //}
 
         }
 

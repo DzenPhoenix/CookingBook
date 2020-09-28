@@ -116,8 +116,8 @@ namespace CookingBook.DataLayer.CookingBookInitializers
             Recipe recipe_1 = new Recipe
             {
                 Name = recipeView_1.Name,
-                CategoryId = 2,
-                KitchenId = 6,
+                CategoryId = 1,
+                KitchenId = 2,
                 MainPictureAdress = recipeView_1.MainPictureAdress,
                 Description = recipeView_1.Description,
                 SerializedIngridients = serializedIngridients,
