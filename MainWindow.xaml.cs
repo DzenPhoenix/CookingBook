@@ -24,5 +24,29 @@ namespace CookingBook
         {
             InitializeComponent();
         }
+
+        private void ButtonExpanderLeftClick(object sender, RoutedEventArgs e)
+        {
+            if (this.LeftPanel.Visibility == Visibility.Visible)
+            {
+                this.LeftPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                this.LeftPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ButtonExpanderRightClick(object sender, RoutedEventArgs e)
+        {
+            if (this.RightPanel.Visibility == Visibility.Visible)
+            {
+                this.RightPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                this.RightPanel.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

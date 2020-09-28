@@ -5,8 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CookingBook"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Cooking book" MinHeight="700" MinWidth="1200" Width="1200" Height="700" WindowState="Maximized">
+    <DockPanel LastChildFill="true">
+        <StackPanel Orientation="Horizontal" Height="20"   DockPanel.Dock="Top" Background="AntiqueWhite">
+            <Menu x:Name="File">
+                <MenuItem Header="File" Background="AntiqueWhite">
+                    <MenuItem Header="Exit"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Edit" Background="AntiqueWhite">
+                    <MenuItem Header="New Recipe"></MenuItem>
+                    <MenuItem Header="Edit Recipe"></MenuItem>
+                    <MenuItem Header="Delete Recipe"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="About" Background="AntiqueWhite"></MenuItem>
+            </Menu>
+        </StackPanel>
+        <StackPanel x:Name="LeftPanel" Orientation="Vertical" DockPanel.Dock="Left" Width="250">
+            <TextBlock Text="Catalog" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+            <Separator></Separator>
+            <TextBlock Text="Category" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
+            <Separator></Separator>
+            <ListBox x:Name="listBoxCategory" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue" >
+                <CheckBox Content="All" IsChecked="True"></CheckBox>
+            </ListBox>
+            <Separator></Separator>
+            <TextBlock Text="Kitchen" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
+            <Separator></Separator>
+            <ListBox x:Name="listBoxKitchen" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue">
+                <CheckBox Content="All" IsChecked="True"></CheckBox>
+            </ListBox>
+            <Separator></Separator>
+            <TextBlock Text="Ingridients" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
+            <ListBox x:Name="listBoxIngridients" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue">
+                <CheckBox Content="All" IsChecked="True"></CheckBox>
+            </ListBox>
+        </StackPanel>
+        <Button x:Name="buttonExpanderLeft" Content="&lt;&lt;" DockPanel.Dock="Left" Width="20" Click="ButtonExpanderLeftClick"></Button>
+        <StackPanel x:Name="RightPanel" Orientation="Vertical" DockPanel.Dock="Right" Width="250">
+        </StackPanel>
+        <Button x:Name="buttonExpanderRight" Content="&gt;&gt;" DockPanel.Dock="Right" Width="20" Click="ButtonExpanderRightClick"></Button>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" >
+            <StackPanel  Orientation="Vertical" DockPanel.Dock="Right">
+                <TextBlock x:Name="textBlockRecipeName" Text="Recipe Name" HorizontalAlignment="Center" FontSize="40"></TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock x:Name="textBlockCategory" Text="Category" FontSize="20" FontStyle="Italic" Foreground="blue" Margin="20,0,20,0"></TextBlock>
+                    <TextBlock x:Name="textBlockKitchen" Text="Kitchen" FontSize="20" FontStyle="Italic" Foreground="blue" Margin="20,0,20,0"></TextBlock>
+                </StackPanel>
+                <Image x:Name="imageMainPicture" Source=".\res\pic\NoPic.png" Stretch="UniformToFill"></Image>
+                <GroupBox Header="Description:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20">
+                    <TextBlock x:Name="textBlockDescription" TextWrapping="Wrap" FontSize="20"></TextBlock>
+                </GroupBox>
+                <GroupBox x:Name="groupBoxIngrdients" Header="Ingridients:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20"></GroupBox>
+                <GroupBox x:Name="groupBoxInstruction" Header="Instruction:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20">
+                    <StackPanel x:Name="stackPanelInstruction" Orientation="Vertical"></StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
