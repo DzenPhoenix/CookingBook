@@ -73,5 +73,11 @@ namespace CookingBook
                 this.RightPanel.Visibility = Visibility.Visible;
             }
         }
+
+        private void GetFilter()
+        {
+            //Filter filter = new Filter();
+            //(this.DataContext as CookingBookViewModel).Filter = filter;
+        }
     }
 }
