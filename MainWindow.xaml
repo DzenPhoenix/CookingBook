@@ -40,10 +40,14 @@
                 <CheckBox Content="All" IsChecked="True"></CheckBox>
             </ListBox>
             <Separator></Separator>
-            <Button x:Name="filter" Content="Filter" Height="30" FontSize="20"></Button>
+            <Button x:Name="buttonFilter" Content="Filter" Height="30" FontSize="20"></Button>
         </StackPanel>
         <Button x:Name="buttonExpanderLeft" Content="&lt;&lt;" DockPanel.Dock="Left" Width="20" Click="ButtonExpanderLeftClick"></Button>
         <StackPanel x:Name="RightPanel" Orientation="Vertical" DockPanel.Dock="Right" Width="250">
+            <TextBlock Text="Filtered recipes" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
+            <ListBox x:Name="listBoxFilteredRecipes" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue">
+                <ListBoxItem Content="Some items"></ListBoxItem>
+            </ListBox>
         </StackPanel>
         <Button x:Name="buttonExpanderRight" Content="&gt;&gt;" DockPanel.Dock="Right" Width="20" Click="ButtonExpanderRightClick"></Button>
         <ScrollViewer VerticalScrollBarVisibility="Auto" >
