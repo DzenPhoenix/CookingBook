@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CookingBook.DataLayer.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace CookingBook
         public MainWindow()
         {
             InitializeComponent();
+            using (CookingBookContext db = new CookingBookContext())
+            {
+                var categoryList = from category in db.Categories
+                                   select category.Name;
+                List<string> ctegories = categoryList.ToList();
+            }
         }
 
         private void ButtonExpanderLeftClick(object sender, RoutedEventArgs e)
