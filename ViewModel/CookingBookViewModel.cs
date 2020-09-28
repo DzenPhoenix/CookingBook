@@ -1,5 +1,6 @@
 ﻿using CookingBook.DataLayer.Contexts;
 using CookingBook.DataLayer.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +13,7 @@ namespace CookingBook.ViewModel
     public class CookingBookViewModel
     {
         public RecipeViewModel SelectedRecipe { get; set; }
-        public ObservableCollection<string> FilteredRecipes { get; set; }
+        public ObservableCollection<RecipeViewModel> FilteredRecipes { get; set; }
         public ObservableCollection<string> Categories { get; set; }
         public ObservableCollection<string> Kitchens { get; set; }
         public ObservableCollection<string> Ingridients { get; set; }
@@ -29,6 +30,16 @@ namespace CookingBook.ViewModel
                                    select kitchen.Name;
                 this.Kitchens = new ObservableCollection<string>(kitchenList.ToList<string>());
 
+                HashSet<string> ingridientSet = new HashSet<string>() ;
+                foreach (Recipe recipe in db.Recipes)
+                {
+                    List<IngridientViewModel> ingridients = JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
+                    foreach (IngridientViewModel ingridient in ingridients)
+                    {
+                        ingridientSet.Add(ingridient.Name);
+                    } 
+                }
+                this.Ingridients = new ObservableCollection<string>(ingridientSet);
             }
         }
 

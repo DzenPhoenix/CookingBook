@@ -120,7 +120,17 @@
   <ItemGroup>
     <Resource Include="Res\pic\NoPic.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Res\pic\TestRecipe\1.jpg" />
+    <Resource Include="Res\pic\TestRecipe\2.jpg" />
+    <Resource Include="Res\pic\TestRecipe\3.jpg" />
+    <Resource Include="Res\pic\TestRecipe\4.jpg" />
+    <Resource Include="Res\pic\TestRecipe\5.jpg" />
+    <Resource Include="Res\pic\TestRecipe\6.jpg" />
+    <Resource Include="Res\pic\TestRecipe\7.jpg" />
+    <Resource Include="Res\pic\TestRecipe\8.jpg" />
+    <Resource Include="Res\pic\TestRecipe\MainPicTest.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

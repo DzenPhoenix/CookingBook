@@ -41,6 +41,13 @@ namespace CookingBook
                 CheckBox box = new CheckBox() { Content = kitchen, IsChecked = false, Foreground = Brushes.Blue };
                 this.listBoxKitchen.Items.Add(box);
             }
+
+            foreach (string ingridient in (this.DataContext as CookingBookViewModel).Ingridients)
+            {
+                CheckBox box = new CheckBox() { Content = ingridient, IsChecked = false, Foreground = Brushes.Blue };
+                this.listBoxIngridients.Items.Add(box);
+            }
+
         }
 
         private void ButtonExpanderLeftClick(object sender, RoutedEventArgs e)
