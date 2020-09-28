@@ -25,22 +25,23 @@
             <Separator></Separator>
             <TextBlock Text="Category" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
             <Separator></Separator>
-            <ListBox x:Name="listBoxCategory" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue" >
-                <CheckBox Content="All" IsChecked="True"></CheckBox>
+            <ListBox x:Name="listBoxCategory" Height="auto" FontSize="20" FontStyle="Italic">
+                <CheckBox Content="All" IsChecked="True" Foreground="blue"></CheckBox>
             </ListBox>
             <Separator></Separator>
             <TextBlock Text="Kitchen" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
             <Separator></Separator>
-            <ListBox x:Name="listBoxKitchen" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue">
-                <CheckBox Content="All" IsChecked="True"></CheckBox>
+            <ListBox x:Name="listBoxKitchen" Height="auto" FontSize="20" FontStyle="Italic">
+                <CheckBox Content="All" IsChecked="True" Foreground="Blue"></CheckBox>
             </ListBox>
             <Separator></Separator>
             <TextBlock Text="Ingridients" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
-            <ListBox x:Name="listBoxIngridients" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue">
-                <CheckBox Content="All" IsChecked="True"></CheckBox>
+            <ListBox x:Name="listBoxIngridients" Height="auto" FontSize="20" FontStyle="Italic">
+                <CheckBox Content="All" IsChecked="True" Foreground="Blue"></CheckBox>
             </ListBox>
             <Separator></Separator>
-            <Button x:Name="buttonFilter" Content="Filter" Height="30" FontSize="20"></Button>
+            <Button x:Name="buttonFilter" Content="Filter" Height="30" FontSize="20" Margin="10"></Button>
+            <Button x:Name="buttonResetFilter" Content="Reset filters" Height="30" FontSize="20" Margin="10"></Button>
         </StackPanel>
         <Button x:Name="buttonExpanderLeft" Content="&lt;&lt;" DockPanel.Dock="Left" Width="20" Click="ButtonExpanderLeftClick"></Button>
         <StackPanel x:Name="RightPanel" Orientation="Vertical" DockPanel.Dock="Right" Width="250">

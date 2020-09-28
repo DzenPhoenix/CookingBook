@@ -1,4 +1,5 @@
 ﻿using CookingBook.DataLayer.Contexts;
+using CookingBook.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,21 @@ namespace CookingBook
         public MainWindow()
         {
             InitializeComponent();
-            using (CookingBookContext db = new CookingBookContext())
+            this.DataContext = new CookingBookViewModel();
+            InitializeDynamicComponent();
+        }
+
+        private void InitializeDynamicComponent()
+        {
+            foreach (string category in (this.DataContext as CookingBookViewModel).Categories)
             {
-                var categoryList = from category in db.Categories
-                                   select category.Name;
-                List<string> ctegories = categoryList.ToList();
+                CheckBox box = new CheckBox() { Content =category, IsChecked = false,Foreground= Brushes.Blue };
+                this.listBoxCategory.Items.Add(box);
+            }
+            foreach (string kitchen in (this.DataContext as CookingBookViewModel).Kitchens)
+            {
+                CheckBox box = new CheckBox() { Content = kitchen, IsChecked = false, Foreground = Brushes.Blue };
+                this.listBoxKitchen.Items.Add(box);
             }
         }
 

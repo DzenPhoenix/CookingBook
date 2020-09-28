@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="DataLayer\Contexts\CookingBookContext.cs" />
     <Compile Include="DataLayer\CookingBookInitializers\CookingBookInitializer.cs" />
+    <Compile Include="ViewModel\CookingBookViewModel.cs" />
     <Compile Include="ViewModel\IngridientViewModel.cs" />
     <Compile Include="ViewModel\InstructionViewModel.cs" />
     <Compile Include="ViewModel\RecipeViewModel.cs" />
