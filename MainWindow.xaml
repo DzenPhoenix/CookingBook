@@ -21,7 +21,7 @@
             </Menu>
         </StackPanel>
         <StackPanel x:Name="LeftPanel" Orientation="Vertical" DockPanel.Dock="Left" Width="250">
-            <TextBlock Text="Catalog" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+            <TextBlock Text="Filter" HorizontalAlignment="Center" FontSize="20"></TextBlock>
             <Separator></Separator>
             <TextBlock Text="Category" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
             <Separator></Separator>
@@ -39,6 +39,8 @@
             <ListBox x:Name="listBoxIngridients" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue">
                 <CheckBox Content="All" IsChecked="True"></CheckBox>
             </ListBox>
+            <Separator></Separator>
+            <Button x:Name="filter" Content="Filter" Height="30" FontSize="20"></Button>
         </StackPanel>
         <Button x:Name="buttonExpanderLeft" Content="&lt;&lt;" DockPanel.Dock="Left" Width="20" Click="ButtonExpanderLeftClick"></Button>
         <StackPanel x:Name="RightPanel" Orientation="Vertical" DockPanel.Dock="Right" Width="250">
