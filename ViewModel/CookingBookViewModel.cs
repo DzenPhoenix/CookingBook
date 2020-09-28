@@ -1,5 +1,6 @@
 ﻿using CookingBook.DataLayer.Contexts;
 using CookingBook.DataLayer.Models;
+using CookingBook.Service;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,12 @@ namespace CookingBook.ViewModel
     public class CookingBookViewModel
     {
         public RecipeViewModel SelectedRecipe { get; set; }
-        public ObservableCollection<string> FilteredRecipes { get; set; }
+        public ObservableCollection<RecipeViewModel> FilteredRecipes { get; set; }
         public ObservableCollection<string> Categories { get; set; }
         public ObservableCollection<string> Kitchens { get; set; }
         public ObservableCollection<string> Ingridients { get; set; }
 
-        //public Service.Filter Filter{get;set;}
+        public Filter Filter{get;set;}
 
 
         public CookingBookViewModel()
@@ -43,64 +44,73 @@ namespace CookingBook.ViewModel
                     } 
                 }
                 this.Ingridients = new ObservableCollection<string>(ingridientSet);
+                this.FilteredRecipes = new ObservableCollection<RecipeViewModel>(GetAllRecipes());            
             }
-            //this.FilteredRecipes = 
+            
         }
 
-        private List<string> FilterByCategory(List<string> categories)
+        private List<RecipeViewModel> GetAllRecipes()
         {
-            List<string> res =new List<string>();
+            List<Recipe> recipes = new List<Recipe>();
+            List<RecipeViewModel> res = new List<RecipeViewModel>();
             using (CookingBookContext db = new CookingBookContext())
             {
-                foreach (Recipe recipe in db.Recipes)
+                var recipeList = from recipe in db.Recipes
+                                 select recipe;
+                recipes = recipeList.ToList<Recipe>();
+            }
+            foreach (Recipe recipe in recipes)
+            {
+                res.Add(new RecipeViewModel(recipe));
+            }
+            return res;
+        }
+
+        private List<Recipe> FilterByCategory(List<Recipe> recipes,List<string> categories)
+        {
+            List<Recipe> res =new List<Recipe>();  
+            foreach (Recipe recipe in recipes)
+            {
+                 foreach (string category in categories)
+                 {
+                     if (recipe.Category.Name==category)
+                     {
+                         res.Add(recipe);break;
+                     }
+                  }
+            }
+            return res;
+        }
+
+        private List<Recipe> FilterByKitchen(List<Recipe> recipes, List<string> kitchens)
+        {
+            List<Recipe> res = new List<Recipe>();
+            foreach (Recipe recipe in recipes)
+            {
+                foreach (string kitchen in kitchens)
                 {
-                    foreach (string category in categories)
+                    if (recipe.Kitchen.Name == kitchen)
                     {
-                        if (recipe.Category.Name == category)
-                        {
-                            res.Add(recipe.Name);break;
-                        }
+                        res.Add(recipe); break;
                     }
                 }
             }
             return res;
         }
 
-        private List<string> FilterByKitchen(List<string> kitchens)
+        private List<Recipe> FilterByIngridients(List<Recipe> recipes,List<string> ingridients)
         {
-            List<string> res = new List<string>();
-            using (CookingBookContext db = new CookingBookContext())
+            List<Recipe> res = new List<Recipe>();
+            foreach (Recipe recipe in recipes)
             {
-                foreach (Recipe recipe in db.Recipes)
+                List<IngridientViewModel> recipeIngridients =  JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
+                foreach (IngridientViewModel recipeIngridient in recipeIngridients)
                 {
-                    foreach (string kitchen in kitchens)
+                    foreach (string ingridient in ingridients)
                     {
-                        if (recipe.Kitchen.Name == kitchen)
+                        if (ingridient == recipeIngridient.Name)
                         {
-                            res.Add(recipe.Name); break;
-                        }
-                    }
-                }
-            }
-            return res;
-        }
-
-        private List<string> FilterByIngridients(List<string> ingridients)
-        {
-            List<string> res = new List<string>();
-            using (CookingBookContext db = new CookingBookContext())
-            {
-                foreach (Recipe recipe in db.Recipes)
-                {
-                    List<IngridientViewModel> recipeIngridients =  JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
-                    foreach (IngridientViewModel recipeIngridient in recipeIngridients)
-                    {
-                        foreach (string ingridient in ingridients)
-                        {
-                            if (ingridient == recipeIngridient.Name)
-                            {
-                                res.Add(recipe.Name); break;
-                            }
+                            res.Add(recipe); break;
                         }
                     }
                 }

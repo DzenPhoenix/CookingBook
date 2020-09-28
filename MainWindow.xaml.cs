@@ -1,4 +1,5 @@
 ﻿using CookingBook.DataLayer.Contexts;
+using CookingBook.Service;
 using CookingBook.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,12 @@ namespace CookingBook
                 this.listBoxIngridients.Items.Add(box);
             }
 
+            foreach (RecipeViewModel recipeView in (this.DataContext as CookingBookViewModel).FilteredRecipes)
+            {
+                ListBoxItem item = new ListBoxItem() { Content = recipeView.Name };
+                this.listBoxFilteredRecipes.Items.Add(item);
+            }
+
         }
 
         private void ButtonExpanderLeftClick(object sender, RoutedEventArgs e)
@@ -76,8 +83,31 @@ namespace CookingBook
 
         private void GetFilter()
         {
-            //Filter filter = new Filter();
-            //(this.DataContext as CookingBookViewModel).Filter = filter;
+            Filter filter = new Filter();
+            foreach (CheckBox box in this.listBoxCategory.Items)
+            {
+                if (box.IsChecked == true)
+                {
+                    filter.Categories.Add(box.Name);
+                }
+            }
+
+            foreach (CheckBox box in this.listBoxKitchen.Items)
+            {
+                if (box.IsChecked == true)
+                {
+                    filter.Kitchens.Add(box.Name);
+                }
+            }
+
+            foreach (CheckBox box in this.listBoxIngridients.Items)
+            {
+                if (box.IsChecked == true)
+                {
+                    filter.Ingridients.Add(box.Name);
+                }
+            }
+            (this.DataContext as CookingBookViewModel).Filter = filter;
         }
     }
 }
