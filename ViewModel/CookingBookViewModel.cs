@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,9 +17,10 @@ using System.Windows.Input;
 
 namespace CookingBook.ViewModel
 {
-    public class CookingBookViewModel
+    public class CookingBookViewModel : INotifyPropertyChanged
     {
-        public RecipeViewModel SelectedRecipe { get; set; }
+        private RecipeViewModel selectedRecipe;
+        public RecipeViewModel SelectedRecipe { get { return selectedRecipe; } set { selectedRecipe = value;OnPropertyChanged("SelectedRecipe"); } }
         public ObservableCollection<RecipeViewModel> FilteredRecipes { get; set; }
         public ObservableCollection<string> Categories { get; set; }
         public ObservableCollection<string> Kitchens { get; set; }
@@ -129,5 +132,12 @@ namespace CookingBook.ViewModel
             this.FilteredRecipes.Clear();
             FilterRecipes(GetAllRecipes(),Filter);
        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

@@ -49,6 +49,22 @@ namespace CookingBook
                 this.listBoxIngridients.Items.Add(box);
             }
 
+            foreach (InstructionViewModel instruction in (this.DataContext as CookingBookViewModel).SelectedRecipe.Instructions)
+            {
+                DockPanel panel = new DockPanel();
+                Image image = new Image()
+                {
+                    MaxWidth = 300,
+                    Stretch = Stretch.UniformToFill,
+                    Source = (new ImageSourceConverter().ConvertFromString(instruction.ImageSource) as ImageSource)
+                };
+                DockPanel.SetDock(image, Dock.Left);
+                panel.Children.Add(image);
+                panel.Children.Add(new TextBlock { Text = instruction.Name, TextWrapping = TextWrapping.Wrap });
+                this.stackPanelInstruction.Children.Add(panel);
+                this.stackPanelInstruction.Children.Add(new Separator());
+            }
+
         }
 
         private void ButtonExpanderLeftClick(object sender, RoutedEventArgs e)
@@ -160,6 +176,28 @@ namespace CookingBook
                 {
                     box.IsChecked = false;
                 }
+            }
+        }
+
+        private void ListBoxFilteredRecipesMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            RecipeViewModel selectedRecipe = (sender as ListBox).SelectedItem as RecipeViewModel;
+            (this.DataContext as CookingBookViewModel).SelectedRecipe = selectedRecipe;
+            this.stackPanelInstruction.Children.Clear();
+            foreach (InstructionViewModel instruction in selectedRecipe.Instructions)
+            {
+                DockPanel panel = new DockPanel();
+                Image image = new Image()
+                {
+                    MaxWidth = 300,
+                    Stretch = Stretch.UniformToFill,
+                    Source = (new ImageSourceConverter().ConvertFromString(instruction.ImageSource) as ImageSource)
+                };
+                DockPanel.SetDock(image, Dock.Left);
+                panel.Children.Add(image);
+                panel.Children.Add(new TextBlock { Text = instruction.Name, TextWrapping = TextWrapping.Wrap });
+                this.stackPanelInstruction.Children.Add(panel);
+                this.stackPanelInstruction.Children.Add(new Separator());
             }
         }
     }

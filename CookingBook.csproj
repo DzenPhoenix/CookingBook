@@ -132,11 +132,22 @@
     <Resource Include="Res\pic\1\7.jpg" />
     <Resource Include="Res\pic\1\8.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Res\pic\2\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Res\pic\1\MainPic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Res\pic\2\1.jpg" />
+    <Resource Include="Res\pic\2\10.jpg" />
+    <Resource Include="Res\pic\2\2.jpg" />
+    <Resource Include="Res\pic\2\3.jpg" />
+    <Resource Include="Res\pic\2\4.jpg" />
+    <Resource Include="Res\pic\2\5.jpg" />
+    <Resource Include="Res\pic\2\6.jpg" />
+    <Resource Include="Res\pic\2\7.jpg" />
+    <Resource Include="Res\pic\2\8.jpg" />
+    <Resource Include="Res\pic\2\9.jpg" />
+    <Resource Include="Res\pic\2\MainPic.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

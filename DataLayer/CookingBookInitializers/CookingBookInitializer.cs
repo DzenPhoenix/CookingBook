@@ -52,14 +52,14 @@ namespace CookingBook.DataLayer.CookingBookInitializers
             IngridientViewModel ing_8 = new IngridientViewModel { Name = "Корица", Comment = "— 1/2 ч. л." };
             recipeView.Ingridients.AddRange(new List<IngridientViewModel>() { ing_1, ing_2, ing_3, ing_4, ing_5, ing_6, ing_7, ing_8 });
 
-            InstructionViewModel ins_1 = new InstructionViewModel { Name = "В миске соединить холодное масло порезанное на кусочки, пудинг, сахар и муку. Всё перетереть руками в крошку.", ImageSource = @".\res\pic\TestRecipe\1.jpg" };
-            InstructionViewModel ins_2 = new InstructionViewModel { Name = "Добавить ваниль и яйцо.", ImageSource = @".\res\pic\1\2.jpg" };
-            InstructionViewModel ins_3 = new InstructionViewModel { Name = "Начать замешивать тесто пока оно не начнёт собираться в шар. Завернуть тесто в пищевую плёнку и убрать на пол часа в холодильник.", ImageSource = @".\res\pic\1\3.jpg" };
-            InstructionViewModel ins_4 = new InstructionViewModel { Name = "Форму (у меня 25 см в диаметре) слегка присыпать мукой. Поверхность, на которой будете раскатывать тесто присыпать мукой. Тесто раскатать в круг чуть больше чем форма. Перенести в форму и равномерно распределить, сделать бортики. Наколоть вилкой и выпекать 10 минут при 180*C (350*F).", ImageSource = @".\res\pic\1\4.jpg" };
-            InstructionViewModel ins_5 = new InstructionViewModel { Name = "Сливы помыть, обсушить, разрезать на половинки и удалить косточку. Порезать каждую половинку на слайсы острым ножом что бы половинки сохранили форму.", ImageSource = @".\res\pic\1\5.jpg" };
-            InstructionViewModel ins_6 = new InstructionViewModel { Name = "Выложить порезанные половинки слив срезом вниз на тарт чередуя вертикальный разрез с горизонтальным. Сахар смешать с корицей. Холодное масло порезать на маленькие кубики.", ImageSource = @".\res\pic\1\6.jpg" };
-            InstructionViewModel ins_7 = new InstructionViewModel { Name = "Посыпать сливы сахаром с корицей и сверху разложить кубики масла.", ImageSource = @".\res\pic\1\7.jpg" };
-            InstructionViewModel ins_8 = new InstructionViewModel { Name = "Выпекать в предварительно разогретой до 180*C (350*F) примерно 25 минут. Дать остыть и вынуть из формы.", ImageSource = @".\res\pic\1\8.jpg" };
+            InstructionViewModel ins_1 = new InstructionViewModel { Name = "В миске соединить холодное масло порезанное на кусочки, пудинг, сахар и муку. Всё перетереть руками в крошку.", ImageSource = @".\Res\pic\1\1.jpg" };
+            InstructionViewModel ins_2 = new InstructionViewModel { Name = "Добавить ваниль и яйцо.", ImageSource = @".\Res\pic\1\2.jpg" };
+            InstructionViewModel ins_3 = new InstructionViewModel { Name = "Начать замешивать тесто пока оно не начнёт собираться в шар. Завернуть тесто в пищевую плёнку и убрать на пол часа в холодильник.", ImageSource = @".\Res\pic\1\3.jpg" };
+            InstructionViewModel ins_4 = new InstructionViewModel { Name = "Форму (у меня 25 см в диаметре) слегка присыпать мукой. Поверхность, на которой будете раскатывать тесто присыпать мукой. Тесто раскатать в круг чуть больше чем форма. Перенести в форму и равномерно распределить, сделать бортики. Наколоть вилкой и выпекать 10 минут при 180*C (350*F).", ImageSource = @".\Res\pic\1\4.jpg" };
+            InstructionViewModel ins_5 = new InstructionViewModel { Name = "Сливы помыть, обсушить, разрезать на половинки и удалить косточку. Порезать каждую половинку на слайсы острым ножом что бы половинки сохранили форму.", ImageSource = @".\Res\pic\1\5.jpg" };
+            InstructionViewModel ins_6 = new InstructionViewModel { Name = "Выложить порезанные половинки слив срезом вниз на тарт чередуя вертикальный разрез с горизонтальным. Сахар смешать с корицей. Холодное масло порезать на маленькие кубики.", ImageSource = @".\Res\pic\1\6.jpg" };
+            InstructionViewModel ins_7 = new InstructionViewModel { Name = "Посыпать сливы сахаром с корицей и сверху разложить кубики масла.", ImageSource = @".\Res\pic\1\7.jpg" };
+            InstructionViewModel ins_8 = new InstructionViewModel { Name = "Выпекать в предварительно разогретой до 180*C (350*F) примерно 25 минут. Дать остыть и вынуть из формы.", ImageSource = @".\Res\pic\1\8.jpg" };
             recipeView.Instructions.AddRange(new List<InstructionViewModel>() { ins_1, ins_2, ins_3, ins_4, ins_5, ins_6, ins_7, ins_8 });
 
             string serializedIngridients = JsonConvert.SerializeObject(recipeView.Ingridients);
@@ -86,13 +86,13 @@ namespace CookingBook.DataLayer.CookingBookInitializers
             recipeView_1.Description = "Хочу предложить вкусный и сытный перекус для пикника. Такие булочки очень удобно брать собой. Отправляясь на природу, на дачу, в лес, они всегда будут кстати. А ещё их очень удобно давать ребёнку в школу.";
 
             IngridientViewModel ing_2_1 = new IngridientViewModel { Name = "Мука пшеничная", Comment = "— 500 г" };
-            IngridientViewModel ing_2_2 = new IngridientViewModel { Name = "Вода", Comment = "300 мл" };
+            IngridientViewModel ing_2_2 = new IngridientViewModel { Name = "Вода", Comment = "—300 мл" };
             IngridientViewModel ing_2_3 = new IngridientViewModel { Name = "Масло растительное", Comment = " — 5 ст. л" };
             IngridientViewModel ing_2_4 = new IngridientViewModel { Name = "Дрожжи", Comment = "(сухие) — 1 пач." };
             IngridientViewModel ing_2_5 = new IngridientViewModel { Name = "Сахар", Comment = " 2 ст. л." };
-            IngridientViewModel ing_2_6 = new IngridientViewModel { Name = "Соль", Comment = "1 щепот." };
+            IngridientViewModel ing_2_6 = new IngridientViewModel { Name = "Соль", Comment = "—1 щепот." };
             IngridientViewModel ing_2_7 = new IngridientViewModel { Name = "Индейка", Comment = "— 800 г" };
-            IngridientViewModel ing_2_8 = new IngridientViewModel { Name = "Перец черный", Comment = "по вкусу" };
+            IngridientViewModel ing_2_8 = new IngridientViewModel { Name = "Перец черный", Comment = "—по вкусу" };
             IngridientViewModel ing_2_9 = new IngridientViewModel { Name = "Яблоко", Comment = "— 1 шт" };
             IngridientViewModel ing_2_10 = new IngridientViewModel { Name = "Лук-порей", Comment = "— 1 шт" };
             IngridientViewModel ing_2_11= new IngridientViewModel { Name = "Яйцо куриное", Comment = "(взбейте, для смазывания) — 1 шт" };

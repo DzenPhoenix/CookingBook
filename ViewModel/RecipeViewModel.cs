@@ -3,21 +3,31 @@ using CookingBook.DataLayer.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CookingBook.ViewModel
 {
-    public class RecipeViewModel
+    public class RecipeViewModel: INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string MainPictureAdress { get; set; }
-        public string Description { get; set; }
-        public string Category { get; set; }
-        public string Kitchen { get; set; }
-        public List<IngridientViewModel> Ingridients { get; set; }
-        public List<InstructionViewModel> Instructions { get; set; }
+        private string name;
+        private string mainPictureAdress;
+        private string description;
+        private string category;
+        private string kitchen;
+        private List<IngridientViewModel> ingridients;
+        private List<InstructionViewModel> instructions;
+
+        public string Name { get { return name; } set { name = value;OnPropertyChanged("Name"); } }
+        public string MainPictureAdress { get { return mainPictureAdress; } set { mainPictureAdress = value; OnPropertyChanged("MainPictureAdress"); } }
+        public string Description { get { return description; } set { description = value; OnPropertyChanged("Description"); } }
+        public string Category { get { return category; } set { category = value; OnPropertyChanged("Category"); } }
+        public string Kitchen { get { return kitchen; } set { kitchen = value; OnPropertyChanged("Kitchen"); } }
+        public List<IngridientViewModel> Ingridients { get { return ingridients; } set { ingridients = value; OnPropertyChanged("Ingridients"); } }
+        public List<InstructionViewModel> Instructions { get { return instructions; } set { instructions = value; OnPropertyChanged("Instructions"); } }
 
         public RecipeViewModel()
         {
@@ -50,6 +60,13 @@ namespace CookingBook.ViewModel
         public override string ToString()
         {
             return this.Name;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
