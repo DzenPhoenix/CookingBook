@@ -125,6 +125,58 @@ namespace CookingBook.DataLayer.CookingBookInitializers
             };
             db.Recipes.Add(recipe_1);
             db.SaveChanges();
+
+            RecipeViewModel recipeView_2 = new RecipeViewModel();
+            recipeView_2.Name = "Огурцы с говядиной по-японски";
+            recipeView_2.Category = "Закуски";
+            recipeView_2.Kitchen = "Японская";
+            recipeView_2.MainPictureAdress = @".\Res\pic\3\MainPic.jpg";
+            recipeView_2.Description = "В меру острая, сытная, мясо-овощная закуска. Прекрасно подойдет в качестве перекуса на пикнике, пока готовится основное блюдо - шашлык или курица. К тому же замечательно разжигает аппетит и является универсальным дополнением к горячительным напиткам. Можно приготовить заранее и взять с собой в контейнере. На большую компанию!";
+
+            IngridientViewModel ing_3_1 = new IngridientViewModel { Name = "Говядина", Comment = "— 400 г" };
+            IngridientViewModel ing_3_2 = new IngridientViewModel { Name = "Огурец", Comment = "— 400 г" };
+            IngridientViewModel ing_3_3 = new IngridientViewModel { Name = "Лук белый", Comment = "— 1 шт" };
+            IngridientViewModel ing_3_4 = new IngridientViewModel { Name = "Чеснок", Comment = "— 4 зуб." };
+            IngridientViewModel ing_3_5 = new IngridientViewModel { Name = "Перец болгарский ", Comment = "(150 г) — 1 шт" };
+            IngridientViewModel ing_3_6 = new IngridientViewModel { Name = "Перец красный жгучий", Comment = "(если не очень острый - то две) — 1 ч. л." };
+            IngridientViewModel ing_3_7 = new IngridientViewModel { Name = "Кориандр", Comment = "— 1 ч. л." };
+            IngridientViewModel ing_3_8 = new IngridientViewModel { Name = "Соевый соус", Comment = "— 4 ст. л." };
+            IngridientViewModel ing_3_9 = new IngridientViewModel { Name = "Сахар", Comment = "— 1 ч. л." };
+            IngridientViewModel ing_3_10 = new IngridientViewModel { Name = "Масло растительное", Comment = "— 4 ст. л" };
+            IngridientViewModel ing_3_11 = new IngridientViewModel { Name = "Уксус", Comment = "— 2 ст. л." };
+            recipeView_2.Ingridients.AddRange(new List<IngridientViewModel>() { ing_3_1, ing_3_2, ing_3_3, ing_3_4, ing_3_5, ing_3_6, ing_3_7, ing_3_8, ing_3_9, ing_3_10, ing_3_11 });
+
+            InstructionViewModel ins_3_1 = new InstructionViewModel { Name = "Необходимые продукты.", ImageSource = @".\Res\pic\3\1.jpg" };
+            InstructionViewModel ins_3_2 = new InstructionViewModel { Name = "Сладкий перец шинкуем тонкой соломкой.", ImageSource = @".\Res\pic\3\2.jpg" };
+            InstructionViewModel ins_3_3 = new InstructionViewModel { Name = "У огурцов отрезаем кончики и нарезаем их вдоль узкими длинными брусочками.", ImageSource = @".\Res\pic\3\3.jpg" };
+            InstructionViewModel ins_3_4 = new InstructionViewModel { Name = "Складываем их в миску, пересыпаем солью и оставляем на 15-20 минут, чтобы пустили сок.", ImageSource = @".\res\pic\3\4.jpg" };
+            InstructionViewModel ins_3_5 = new InstructionViewModel { Name = "Лук шинкуем полукольцами.", ImageSource = @".\res\pic\3\5.jpg" };
+            InstructionViewModel ins_3_6 = new InstructionViewModel { Name = "Чеснок мелко рубим.", ImageSource = @".\res\pic\3\6.jpg" };
+            InstructionViewModel ins_3_7 = new InstructionViewModel { Name = "Мясо режем тонкой соломкой.", ImageSource = @".\res\pic\3\7.jpg" };
+            InstructionViewModel ins_3_8 = new InstructionViewModel { Name = "Хорошенько разогреваем сковородку с растительным маслом. Обжариваем мясо на сильном огне, постоянно помешивая.", ImageSource = @".\res\pic\3\8.jpg" };
+            InstructionViewModel ins_3_9 = new InstructionViewModel { Name = "Огурцы немного отжимаем и сливаем сок. На них кучкой выкладываем красный острый перец, кориандр и сахар.", ImageSource = @".\res\pic\3\9.jpg" };
+            InstructionViewModel ins_3_10 = new InstructionViewModel { Name = "Сверху засыпаем луком и сладким перцем.", ImageSource = @".\res\pic\3\10.jpg" };
+            InstructionViewModel ins_3_11 = new InstructionViewModel { Name = "Добавляем соль и заливаем содержимым сковороды.", ImageSource = @".\res\pic\3\11.jpg" };
+            InstructionViewModel ins_3_12 = new InstructionViewModel { Name = "Перемешиваем.", ImageSource = @".\res\pic\3\12.jpg" };
+            InstructionViewModel ins_3_13 = new InstructionViewModel { Name = "Добавляем чеснок, уксус и соевый соус.", ImageSource = @".\res\pic\3\13.jpg" };
+            InstructionViewModel ins_3_14 = new InstructionViewModel { Name = "Перемешиваем еще раз.", ImageSource = @".\res\pic\3\14.jpg" };
+            recipeView_2.Instructions.AddRange(new List<InstructionViewModel>() { ins_3_1, ins_3_2, ins_3_3, ins_3_4, ins_3_5, ins_3_6, ins_3_7, ins_3_8, ins_3_9, ins_3_10, ins_3_11, ins_3_12, ins_3_13, ins_3_14 });
+
+            serializedIngridients = JsonConvert.SerializeObject(recipeView_2.Ingridients);
+            serializedInstructions = JsonConvert.SerializeObject(recipeView_2.Instructions);
+
+            Recipe recipe_2 = new Recipe
+            {
+                Name = recipeView_2.Name,
+                CategoryId = 6,
+                KitchenId = 5,
+                MainPictureAdress = recipeView_2.MainPictureAdress,
+                Description = recipeView_2.Description,
+                SerializedIngridients = serializedIngridients,
+                SerializedInstructions = serializedInstructions
+            };
+            db.Recipes.Add(recipe_2);
+            db.SaveChanges();
         }
     }
 }
