@@ -1,6 +1,7 @@
 ﻿using CookingBook.DataLayer.Contexts;
 using CookingBook.DataLayer.Models;
 using CookingBook.Service;
+using CookingBook.ViewModel.Commands;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CookingBook.ViewModel
 {
@@ -19,7 +23,16 @@ namespace CookingBook.ViewModel
         public ObservableCollection<string> Kitchens { get; set; }
         public ObservableCollection<string> Ingridients { get; set; }
 
-        public Filter Filter{get;set;}
+        private CookingBookCommand filterCommand;
+        public CookingBookCommand FilterCommand
+        {
+            get
+            {
+                return filterCommand??(filterCommand = new CookingBookCommand(FilterAction));
+            }
+        }
+
+        public Filter Filter { get; set; }
 
 
         public CookingBookViewModel()
@@ -27,26 +40,26 @@ namespace CookingBook.ViewModel
             using (CookingBookContext db = new CookingBookContext())
             {
                 var categoryList = from category in db.Categories
-                                   select category.Name;     
+                                   select category.Name;
                 this.Categories = new ObservableCollection<string>(categoryList.ToList<string>());
 
                 var kitchenList = from kitchen in db.Kitchens
-                                   select kitchen.Name;
+                                  select kitchen.Name;
                 this.Kitchens = new ObservableCollection<string>(kitchenList.ToList<string>());
 
-                HashSet<string> ingridientSet = new HashSet<string>() ;
+                HashSet<string> ingridientSet = new HashSet<string>();
                 foreach (Recipe recipe in db.Recipes)
                 {
                     List<IngridientViewModel> ingridients = JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
                     foreach (IngridientViewModel ingridient in ingridients)
                     {
                         ingridientSet.Add(ingridient.Name);
-                    } 
+                    }
                 }
                 this.Ingridients = new ObservableCollection<string>(ingridientSet);
-                this.FilteredRecipes = new ObservableCollection<RecipeViewModel>(GetAllRecipes());            
+                this.FilteredRecipes = new ObservableCollection<RecipeViewModel>(GetAllRecipes());
             }
-            
+
         }
 
         private List<RecipeViewModel> GetAllRecipes()
@@ -66,20 +79,18 @@ namespace CookingBook.ViewModel
             return res;
         }
 
-        private List<Recipe> FilterByCategory(List<Recipe> recipes,List<string> categories)
+        private void FilterByCategory(List<RecipeViewModel> recipes, List<string> categories)
         {
-            List<Recipe> res =new List<Recipe>();  
-            foreach (Recipe recipe in recipes)
+            foreach (RecipeViewModel recipe in recipes)
             {
-                 foreach (string category in categories)
-                 {
-                     if (recipe.Category.Name==category)
-                     {
-                         res.Add(recipe);break;
-                     }
-                  }
+                foreach (string category in categories)
+                {
+                    if (recipe.Category == category)
+                    {
+                        this.FilteredRecipes.Add(recipe); break;
+                    }
+                }
             }
-            return res;
         }
 
         private List<Recipe> FilterByKitchen(List<Recipe> recipes, List<string> kitchens)
@@ -98,12 +109,12 @@ namespace CookingBook.ViewModel
             return res;
         }
 
-        private List<Recipe> FilterByIngridients(List<Recipe> recipes,List<string> ingridients)
+        private List<Recipe> FilterByIngridients(List<Recipe> recipes, List<string> ingridients)
         {
             List<Recipe> res = new List<Recipe>();
             foreach (Recipe recipe in recipes)
             {
-                List<IngridientViewModel> recipeIngridients =  JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
+                List<IngridientViewModel> recipeIngridients = JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
                 foreach (IngridientViewModel recipeIngridient in recipeIngridients)
                 {
                     foreach (string ingridient in ingridients)
@@ -116,6 +127,12 @@ namespace CookingBook.ViewModel
                 }
             }
             return res;
-        }      
+        }
+
+       void FilterAction(object filteredRecipes)
+       {
+            this.FilteredRecipes.Clear();
+            FilterByCategory(GetAllRecipes(), Filter.Categories);
+       }
     }
 }

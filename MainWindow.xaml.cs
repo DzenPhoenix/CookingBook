@@ -34,7 +34,7 @@ namespace CookingBook
         {
             foreach (string category in (this.DataContext as CookingBookViewModel).Categories)
             {
-                CheckBox box = new CheckBox() { Content =category, IsChecked = false,Foreground= Brushes.Blue };
+                CheckBox box = new CheckBox() { Content =category, IsChecked = true,Foreground= Brushes.Blue };
                 this.listBoxCategory.Items.Add(box);
             }
             foreach (string kitchen in (this.DataContext as CookingBookViewModel).Kitchens)
@@ -48,13 +48,6 @@ namespace CookingBook
                 CheckBox box = new CheckBox() { Content = ingridient, IsChecked = false, Foreground = Brushes.Blue };
                 this.listBoxIngridients.Items.Add(box);
             }
-
-            //foreach (RecipeViewModel recipeView in (this.DataContext as CookingBookViewModel).FilteredRecipes)
-            //{
-
-            //    ListBoxItem item = new ListBoxItem() { Content = recipeView.Name };
-            //    this.listBoxFilteredRecipes.Items.Add(item);
-            //}
 
         }
 
@@ -89,7 +82,7 @@ namespace CookingBook
             {
                 if (box.IsChecked == true)
                 {
-                    filter.Categories.Add(box.Name);
+                    filter.Categories.Add(box.Content as string);
                 }
             }
 
@@ -109,6 +102,29 @@ namespace CookingBook
                 }
             }
             (this.DataContext as CookingBookViewModel).Filter = filter;
+        }
+
+        private void ButtonFilterClick(object sender, RoutedEventArgs e)
+        {
+            GetFilter();
+        }
+
+        private void CheckBoxClickAll(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).IsChecked == true)
+            {
+                foreach (CheckBox box in this.listBoxCategory.Items)
+                {
+                    box.IsChecked = true;
+                }
+            }
+            else
+            {
+                foreach (CheckBox box in this.listBoxCategory.Items)
+                {
+                    box.IsChecked = false;
+                }
+            }
         }
     }
 }
