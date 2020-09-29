@@ -89,14 +89,14 @@ namespace CookingBook.DataLayer.CookingBookInitializers
             IngridientViewModel ing_2_2 = new IngridientViewModel { Name = "Вода", Comment = "300 мл" };
             IngridientViewModel ing_2_3 = new IngridientViewModel { Name = "Масло растительное", Comment = " — 5 ст. л" };
             IngridientViewModel ing_2_4 = new IngridientViewModel { Name = "Дрожжи", Comment = "(сухие) — 1 пач." };
-            IngridientViewModel ing_2_5 = new IngridientViewModel { Name = "Сахар ", Comment = " 2 ст. л." };
-            IngridientViewModel ing_2_6 = new IngridientViewModel { Name = "Соль ", Comment = "1 щепот." };
+            IngridientViewModel ing_2_5 = new IngridientViewModel { Name = "Сахар", Comment = " 2 ст. л." };
+            IngridientViewModel ing_2_6 = new IngridientViewModel { Name = "Соль", Comment = "1 щепот." };
             IngridientViewModel ing_2_7 = new IngridientViewModel { Name = "Индейка", Comment = "— 800 г" };
-            IngridientViewModel ing_2_8 = new IngridientViewModel { Name = "Перец черный ", Comment = "по вкусу" };
-            IngridientViewModel ing_2_9 = new IngridientViewModel { Name = "Яблоко ", Comment = "— 1 шт" };
+            IngridientViewModel ing_2_8 = new IngridientViewModel { Name = "Перец черный", Comment = "по вкусу" };
+            IngridientViewModel ing_2_9 = new IngridientViewModel { Name = "Яблоко", Comment = "— 1 шт" };
             IngridientViewModel ing_2_10 = new IngridientViewModel { Name = "Лук-порей", Comment = "— 1 шт" };
-            IngridientViewModel ing_2_11= new IngridientViewModel { Name = "Яйцо куриное ", Comment = "(взбейте, для смазывания) — 1 шт" };
-            recipeView.Ingridients.AddRange(new List<IngridientViewModel>() { ing_2_1, ing_2_2, ing_2_3, ing_2_4, ing_2_5, ing_2_6, ing_2_7, ing_2_8, ing_2_9, ing_2_10, ing_2_11 });
+            IngridientViewModel ing_2_11= new IngridientViewModel { Name = "Яйцо куриное", Comment = "(взбейте, для смазывания) — 1 шт" };
+            recipeView_1.Ingridients.AddRange(new List<IngridientViewModel>() { ing_2_1, ing_2_2, ing_2_3, ing_2_4, ing_2_5, ing_2_6, ing_2_7, ing_2_8, ing_2_9, ing_2_10, ing_2_11 });
 
             InstructionViewModel ins_2_1 = new InstructionViewModel { Name = "Бедро индейки нужно предварительно запечь. Я обычно ставлю запекаться на ночь. Бедро индейки посолите и поперчите, приправьте итальянскими травами, хорошо заверните в фольгу и запекайте при температуре 200 градусов 2 часа.", ImageSource = @".\res\pic\2\1.jpg" };
             InstructionViewModel ins_2_2 = new InstructionViewModel { Name = "Дрожжи растворите в тёплой воде, добавьте сахар, 1 ст. л. муки, хорошо перемешайте и дайте постоять 10 мин.", ImageSource = @".\res\pic\2\2.jpg" };
@@ -108,7 +108,7 @@ namespace CookingBook.DataLayer.CookingBookInitializers
             InstructionViewModel ins_2_8 = new InstructionViewModel { Name = "Раскатайте половину теста в пласт толщиной 1 см.", ImageSource = @".\res\pic\2\8.jpg" };
             InstructionViewModel ins_2_9 = new InstructionViewModel { Name = "Равномерно выложите половину начинки, края смажьте яйцом и плотно заверните в рулет, разрежьте на три части. Также заверните второй рулет.", ImageSource = @".\res\pic\2\9.jpg" };
             InstructionViewModel ins_2_10 = new InstructionViewModel { Name = "Выложите рулетики на противень застеленной пергаментом или силиконовым ковриком. Смажьте рулеты оставшимся яйцом. Запекайте в предварительно нагретой до 180 градусов духовке 25", ImageSource = @".\res\pic\2\10.jpg" };
-            recipeView.Instructions.AddRange(new List<InstructionViewModel>() { ins_2_1, ins_2_2, ins_2_3, ins_2_4, ins_2_5, ins_2_6, ins_2_7, ins_2_8, ins_2_9, ins_2_10 });
+            recipeView_1.Instructions.AddRange(new List<InstructionViewModel>() { ins_2_1, ins_2_2, ins_2_3, ins_2_4, ins_2_5, ins_2_6, ins_2_7, ins_2_8, ins_2_9, ins_2_10 });
 
             serializedIngridients = JsonConvert.SerializeObject(recipeView_1.Ingridients);
             serializedInstructions = JsonConvert.SerializeObject(recipeView_1.Instructions);

@@ -39,13 +39,13 @@ namespace CookingBook
             }
             foreach (string kitchen in (this.DataContext as CookingBookViewModel).Kitchens)
             {
-                CheckBox box = new CheckBox() { Content = kitchen, IsChecked = false, Foreground = Brushes.Blue };
+                CheckBox box = new CheckBox() { Content = kitchen, IsChecked = true, Foreground = Brushes.Blue };
                 this.listBoxKitchen.Items.Add(box);
             }
 
             foreach (string ingridient in (this.DataContext as CookingBookViewModel).Ingridients)
             {
-                CheckBox box = new CheckBox() { Content = ingridient, IsChecked = false, Foreground = Brushes.Blue };
+                CheckBox box = new CheckBox() { Content = ingridient, IsChecked = true, Foreground = Brushes.Blue };
                 this.listBoxIngridients.Items.Add(box);
             }
 
@@ -90,7 +90,7 @@ namespace CookingBook
             {
                 if (box.IsChecked == true)
                 {
-                    filter.Kitchens.Add(box.Name);
+                    filter.Kitchens.Add(box.Content as string);
                 }
             }
 
@@ -98,7 +98,7 @@ namespace CookingBook
             {
                 if (box.IsChecked == true)
                 {
-                    filter.Ingridients.Add(box.Name);
+                    filter.Ingridients.Add(box.Content as string);
                 }
             }
             (this.DataContext as CookingBookViewModel).Filter = filter;
@@ -109,7 +109,7 @@ namespace CookingBook
             GetFilter();
         }
 
-        private void CheckBoxClickAll(object sender, RoutedEventArgs e)
+        private void CheckBoxClickAllCategory(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).IsChecked == true)
             {
@@ -121,6 +121,42 @@ namespace CookingBook
             else
             {
                 foreach (CheckBox box in this.listBoxCategory.Items)
+                {
+                    box.IsChecked = false;
+                }
+            }
+        }
+
+        private void CheckBoxClickAllKitchen(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).IsChecked == true)
+            {
+                foreach (CheckBox box in this.listBoxKitchen.Items)
+                {
+                    box.IsChecked = true;
+                }
+            }
+            else
+            {
+                foreach (CheckBox box in this.listBoxKitchen.Items)
+                {
+                    box.IsChecked = false;
+                }
+            }
+        }
+
+        private void CheckBoxClickAllIngridients(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).IsChecked == true)
+            {
+                foreach (CheckBox box in this.listBoxIngridients.Items)
+                {
+                    box.IsChecked = true;
+                }
+            }
+            else
+            {
+                foreach (CheckBox box in this.listBoxIngridients.Items)
                 {
                     box.IsChecked = false;
                 }

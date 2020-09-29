@@ -79,51 +79,45 @@ namespace CookingBook.ViewModel
             return res;
         }
 
-        private void FilterByCategory(List<RecipeViewModel> recipes, List<string> categories)
+        private void FilterRecipes(List<RecipeViewModel> recipes,Filter filter)
         {
             foreach (RecipeViewModel recipe in recipes)
             {
-                foreach (string category in categories)
+                if (RequiredByCategory(recipe, filter.Categories) && RequiredByKitchen(recipe, filter.Kitchens) && RequiredByIngridients(recipe, filter.Ingridients))
                 {
-                    if (recipe.Category == category)
-                    {
-                        this.FilteredRecipes.Add(recipe); break;
-                    }
+                    this.FilteredRecipes.Add(recipe);
                 }
             }
         }
 
-        private List<Recipe> FilterByKitchen(List<Recipe> recipes, List<string> kitchens)
+        private bool RequiredByCategory(RecipeViewModel recipe, List<string> categories)
         {
-            List<Recipe> res = new List<Recipe>();
-            foreach (Recipe recipe in recipes)
+            bool res = false;
+            foreach (string category in categories)
             {
-                foreach (string kitchen in kitchens)
-                {
-                    if (recipe.Kitchen.Name == kitchen)
-                    {
-                        res.Add(recipe); break;
-                    }
-                }
+                res = res || recipe.Category == category;
             }
             return res;
         }
 
-        private List<Recipe> FilterByIngridients(List<Recipe> recipes, List<string> ingridients)
+        private bool RequiredByKitchen(RecipeViewModel recipe, List<string> kitchens)
         {
-            List<Recipe> res = new List<Recipe>();
-            foreach (Recipe recipe in recipes)
+            bool res = false;
+            foreach (string kitchen in kitchens)
             {
-                List<IngridientViewModel> recipeIngridients = JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
-                foreach (IngridientViewModel recipeIngridient in recipeIngridients)
+                res = res || recipe.Kitchen == kitchen;
+            }
+            return res;
+        }
+
+        private bool RequiredByIngridients(RecipeViewModel recipe, List<string> ingridients)
+        {
+            bool res = false;
+            foreach (IngridientViewModel recipeIngridient in recipe.Ingridients)
+            {
+                foreach (string ingridient in ingridients)
                 {
-                    foreach (string ingridient in ingridients)
-                    {
-                        if (ingridient == recipeIngridient.Name)
-                        {
-                            res.Add(recipe); break;
-                        }
-                    }
+                    res = res || recipeIngridient.Name == ingridient;
                 }
             }
             return res;
@@ -132,7 +126,7 @@ namespace CookingBook.ViewModel
        void FilterAction(object filteredRecipes)
        {
             this.FilteredRecipes.Clear();
-            FilterByCategory(GetAllRecipes(), Filter.Categories);
+            FilterRecipes(GetAllRecipes(),Filter);
        }
     }
 }
