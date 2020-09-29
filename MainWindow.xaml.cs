@@ -43,9 +43,9 @@ namespace CookingBook
                 this.listBoxKitchen.Items.Add(box);
             }
 
-            foreach (string ingridient in (this.DataContext as CookingBookViewModel).Ingridients)
+            foreach (IngridientViewModel ingridient in (this.DataContext as CookingBookViewModel).Ingridients)
             {
-                CheckBox box = new CheckBox() { Content = ingridient, IsChecked = true, Foreground = Brushes.Blue };
+                CheckBox box = new CheckBox() { Content = ingridient.Name, IsChecked = true, Foreground = Brushes.Blue };
                 this.listBoxIngridients.Items.Add(box);
             }
 

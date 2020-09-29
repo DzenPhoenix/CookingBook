@@ -42,7 +42,6 @@
                 </ListBox>
                 <Separator></Separator>
                 <Button x:Name="buttonFilter" Content="Filter" Height="30" FontSize="20" Margin="10" Click="ButtonFilterClick" Command="{Binding FilterCommand}" ></Button>
-                <Button x:Name="buttonResetFilter" Content="Reset filters" Height="30" FontSize="20" Margin="10"></Button>
             </StackPanel>
         </ScrollViewer>
         <Button x:Name="buttonExpanderLeft" Content="&lt;&lt;" DockPanel.Dock="Left" Width="20" Click="ButtonExpanderLeftClick"></Button>
@@ -53,16 +52,18 @@
         <Button x:Name="buttonExpanderRight" Content="&gt;&gt;" DockPanel.Dock="Right" Width="20" Click="ButtonExpanderRightClick"></Button>
         <ScrollViewer VerticalScrollBarVisibility="Auto" >
             <StackPanel  Orientation="Vertical" DockPanel.Dock="Right">
-                <TextBlock x:Name="textBlockRecipeName" Text="Recipe Name" HorizontalAlignment="Center" FontSize="40"></TextBlock>
+                <TextBlock x:Name="textBlockRecipeName" Text="{Binding SelectedRecipe.Name}" HorizontalAlignment="Center" FontSize="40"></TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock x:Name="textBlockCategory" Text="Category" FontSize="20" FontStyle="Italic" Foreground="blue" Margin="20,0,20,0"></TextBlock>
-                    <TextBlock x:Name="textBlockKitchen" Text="Kitchen" FontSize="20" FontStyle="Italic" Foreground="blue" Margin="20,0,20,0"></TextBlock>
+                    <TextBlock x:Name="textBlockCategory" Text="{Binding SelectedRecipe.Category}" FontSize="20" FontStyle="Italic" Foreground="blue" Margin="20,0,20,0"></TextBlock>
+                    <TextBlock x:Name="textBlockKitchen" Text="{Binding SelectedRecipe.Kitchen}" FontSize="20" FontStyle="Italic" Foreground="blue" Margin="20,0,20,0"></TextBlock>
                 </StackPanel>
-                <Image x:Name="imageMainPicture" Source=".\res\pic\NoPic.png" Stretch="UniformToFill"></Image>
+                <Image x:Name="imageMainPicture" Source="{Binding SelectedRecipe.MainPictureAdress}" Stretch="UniformToFill"></Image>
                 <GroupBox Header="Description:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20">
-                    <TextBlock x:Name="textBlockDescription" TextWrapping="Wrap" FontSize="20"></TextBlock>
+                    <TextBlock x:Name="textBlockDescription" Text="{Binding SelectedRecipe.Description}" TextWrapping="Wrap" FontSize="20"></TextBlock>
                 </GroupBox>
-                <GroupBox x:Name="groupBoxIngrdients" Header="Ingridients:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20"></GroupBox>
+                <GroupBox x:Name="groupBoxIngridients" Header="Ingridients:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20">
+                    <ListBox ItemsSource="{Binding Ingridients}" FontSize="20" FontStyle="Italic" Foreground="blue"></ListBox>
+                </GroupBox>
                 <GroupBox x:Name="groupBoxInstruction" Header="Instruction:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20">
                     <StackPanel x:Name="stackPanelInstruction" Orientation="Vertical"></StackPanel>
                 </GroupBox>

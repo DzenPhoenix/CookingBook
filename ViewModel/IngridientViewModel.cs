@@ -10,5 +10,9 @@ namespace CookingBook.ViewModel
     {
         public string Name { get; set; }
         public string Comment { get; set; }
-    }
+        public override string ToString()
+        {
+            return this.Name + this.Comment;
+        }
+    } 
 }

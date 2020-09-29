@@ -21,7 +21,7 @@ namespace CookingBook.ViewModel
         public ObservableCollection<RecipeViewModel> FilteredRecipes { get; set; }
         public ObservableCollection<string> Categories { get; set; }
         public ObservableCollection<string> Kitchens { get; set; }
-        public ObservableCollection<string> Ingridients { get; set; }
+        public ObservableCollection<IngridientViewModel> Ingridients { get; set; }
 
         private CookingBookCommand filterCommand;
         public CookingBookCommand FilterCommand
@@ -47,17 +47,18 @@ namespace CookingBook.ViewModel
                                   select kitchen.Name;
                 this.Kitchens = new ObservableCollection<string>(kitchenList.ToList<string>());
 
-                HashSet<string> ingridientSet = new HashSet<string>();
+                HashSet<IngridientViewModel> ingridientSet = new HashSet<IngridientViewModel>();
                 foreach (Recipe recipe in db.Recipes)
                 {
                     List<IngridientViewModel> ingridients = JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
                     foreach (IngridientViewModel ingridient in ingridients)
                     {
-                        ingridientSet.Add(ingridient.Name);
+                        ingridientSet.Add(ingridient);
                     }
                 }
-                this.Ingridients = new ObservableCollection<string>(ingridientSet);
+                this.Ingridients = new ObservableCollection<IngridientViewModel>(ingridientSet);
                 this.FilteredRecipes = new ObservableCollection<RecipeViewModel>(GetAllRecipes());
+                this.SelectedRecipe = this.FilteredRecipes[0];
             }
 
         }
