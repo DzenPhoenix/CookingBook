@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CookingBook.View"
         mc:Ignorable="d"
-        Title="Add recipe" MinHeight="700" MinWidth="1200" Width="1200" Height="1250" WindowState="Maximized">
+        Title="Add recipe" MinHeight="700" MinWidth="1200" Width="1200" Height="1150" WindowState="Maximized">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel  Orientation="Vertical">
             <DockPanel Height="auto" LastChildFill="True">
@@ -23,9 +23,9 @@
             <DockPanel>
                 <StackPanel Orientation="Vertical">
                     <Border BorderThickness="2" BorderBrush="AntiqueWhite"  Margin="10">
-                        <Image Stretch="UniformToFill" Source = "..\Res\pic\NoPic.png" Margin="10" ></Image>
+                        <Image x:Name="imageMainPic" Stretch="UniformToFill" Source = "..\Res\pic\NoPic.png" Margin="10" Width="800" ></Image>
                     </Border>
-                    <Button Content="Add main picture" FontSize="30" DockPanel.Dock="Top" Margin="10"></Button>
+                    <Button Content="Add main picture" FontSize="30" DockPanel.Dock="Top" Margin="10" Click="ButtonAddMainPictureClick"></Button>
                 </StackPanel>
             </DockPanel>
             <DockPanel>
@@ -33,23 +33,23 @@
                 <TextBox TextWrapping="Wrap" FontSize="30" Margin="10"></TextBox>
             </DockPanel>
             <TextBlock Text="Add recipe ingridients and comments:" FontSize="30" Margin="10" HorizontalAlignment="Center" DockPanel.Dock="Top"></TextBlock>
-            <StackPanel Orientation="Vertical">
+            <StackPanel x:Name="stackPanelIngridients" Orientation="Vertical">
                 <DockPanel LastChildFill="True">
                     <ComboBox DockPanel.Dock="Left" FontSize="30" Margin="10" BorderThickness="2" Width="300" IsEditable="True"></ComboBox>
-                    <Button DockPanel.Dock="Right" Content="+" FontSize="30" Width="50" Margin="10"></Button>
+                    <Button DockPanel.Dock="Right" Content="+" FontSize="30" Width="50" Margin="10" Tag="0" Click="ButtonIngridientClick"></Button>
                     <TextBox  FontSize="30" Margin="10" BorderThickness="2"></TextBox>
                 </DockPanel>
             </StackPanel>
             <TextBlock Text="Add recipe instructions:" FontSize="30" Margin="10" HorizontalAlignment="Center" DockPanel.Dock="Top"></TextBlock>
-            <StackPanel Orientation="Vertical">
+            <StackPanel x:Name="stackPanelInstrucions" Orientation="Vertical">
                 <DockPanel LastChildFill="True">
-                    <Border BorderThickness="2" BorderBrush="AntiqueWhite"  Margin="10">
+                    <Border BorderThickness="2" BorderBrush="AntiqueWhite"  Margin="10" DockPanel.Dock="Left">
                         <StackPanel Orientation="Vertical">
-                            <Image DockPanel.Dock="Left" Source="..\Res\pic\NoPic.png" MaxWidth="300" Stretch="UniformToFill"></Image>
-                            <Button Content="Add" FontSize="20"></Button>
+                            <Image x:Name="ing_1"  Source="..\Res\pic\NoPic.png" MaxWidth="300" Stretch="UniformToFill"></Image>
+                            <Button Content="Add" FontSize="20"  Click="ButtonAddPictureClick" Tag="{Binding ElementName=ing_1}"></Button>
                         </StackPanel>
                     </Border>
-                    <Button DockPanel.Dock="Right" Content="+" FontSize="30" Width="50" Margin="10"></Button>
+                    <Button DockPanel.Dock="Right" Content="+" FontSize="30" Width="50" Margin="10" Click="ButtonInstructionsClick"></Button>
                     <TextBox  FontSize="30" Margin="10" BorderThickness="2"></TextBox>
                 </DockPanel>
             </StackPanel>
