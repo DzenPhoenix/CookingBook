@@ -76,6 +76,9 @@
     <Compile Include="ViewModel\IngridientViewModel.cs" />
     <Compile Include="ViewModel\InstructionViewModel.cs" />
     <Compile Include="ViewModel\RecipeViewModel.cs" />
+    <Compile Include="View\AddRecipe.xaml.cs">
+      <DependentUpon>AddRecipe.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddRecipe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -132,7 +139,23 @@
     <Resource Include="Res\pic\1\7.jpg" />
     <Resource Include="Res\pic\1\8.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Res\pic\3\1.jpg" />
+    <Resource Include="Res\pic\3\10.jpg" />
+    <Resource Include="Res\pic\3\11.jpg" />
+    <Resource Include="Res\pic\3\12.jpg" />
+    <Resource Include="Res\pic\3\13.jpg" />
+    <Resource Include="Res\pic\3\14.jpg" />
+    <Resource Include="Res\pic\3\2.jpg" />
+    <Resource Include="Res\pic\3\3.jpg" />
+    <Resource Include="Res\pic\3\4.jpg" />
+    <Resource Include="Res\pic\3\5.jpg" />
+    <Resource Include="Res\pic\3\6.jpg" />
+    <Resource Include="Res\pic\3\7.jpg" />
+    <Resource Include="Res\pic\3\8.jpg" />
+    <Resource Include="Res\pic\3\9.jpg" />
+    <Resource Include="Res\pic\3\MainPic.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Res\pic\1\MainPic.png" />
   </ItemGroup>

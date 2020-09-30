@@ -13,7 +13,7 @@
                     <MenuItem Header="Exit"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Edit" Background="AntiqueWhite">
-                    <MenuItem Header="New Recipe"></MenuItem>
+                    <MenuItem Header="New Recipe" Click="AddRecipeClick"></MenuItem>
                     <MenuItem Header="Edit Recipe"></MenuItem>
                     <MenuItem Header="Delete Recipe"></MenuItem>
                 </MenuItem>

@@ -1,5 +1,6 @@
 ﻿using CookingBook.DataLayer.Contexts;
 using CookingBook.Service;
+using CookingBook.View;
 using CookingBook.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -199,6 +200,12 @@ namespace CookingBook
                 this.stackPanelInstruction.Children.Add(panel);
                 this.stackPanelInstruction.Children.Add(new Separator());
             }
+        }
+
+        private void AddRecipeClick(object sender, RoutedEventArgs e)
+        {
+            AddRecipe addForm = new AddRecipe();
+            addForm.ShowDialog();
         }
     }
 }
