@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CookingBook.DataLayer.Contexts;
+using CookingBook.DataLayer.Models;
+using CookingBook.ViewModel;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,8 +32,47 @@ namespace CookingBook.View
             this.Height = 800;
             tagOfIngridient = 0;
             tagOfInstruction = 0;
+            InitComboBoxCategory();
+            InitComboBoxKitchen();
+            InitComboBoxIngridient(this.comboBoxIngridient);
         }
 
+        private void InitComboBoxCategory()
+        {
+            using (CookingBookContext db = new CookingBookContext())
+            {
+                List<String> categories = (from category in db.Categories
+                                             select category.Name).ToList<String>();
+                this.comboBoxCategory.ItemsSource = categories;
+            }
+        }
+
+        private void InitComboBoxKitchen()
+        {
+            using (CookingBookContext db = new CookingBookContext())
+            {
+                List<String> kitchens = (from kitchen in db.Kitchens
+                                           select kitchen.Name).ToList<String>();
+                this.comboBoxKitchen.ItemsSource = kitchens;
+            }
+        }
+
+        private void InitComboBoxIngridient(ComboBox box)
+        {
+            using (CookingBookContext db = new CookingBookContext())
+            {
+                HashSet<string> ingridientSet = new HashSet<string>();
+                foreach (Recipe recipe in db.Recipes)
+                {
+                    List<IngridientViewModel> ingridients = JsonConvert.DeserializeObject<List<IngridientViewModel>>(recipe.SerializedIngridients);
+                    foreach (IngridientViewModel ingridient in ingridients)
+                    {
+                        ingridientSet.Add(ingridient.Name);
+                    }
+                }
+                box.ItemsSource = new List<string>(ingridientSet);
+            }
+        }
         private void AddPicture(Image image)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
@@ -72,6 +115,7 @@ namespace CookingBook.View
                 (sender as Button).Content = "-";
                 DockPanel dockPanel = new DockPanel() { LastChildFill = true };
                 ComboBox comboBox = new ComboBox() { FontSize = 30, Margin = new Thickness(10), BorderThickness = new Thickness(2), Width = 300, IsEditable = true };
+                InitComboBoxIngridient(comboBox);
                 DockPanel.SetDock(comboBox, Dock.Left);
                 dockPanel.Children.Add(comboBox);
 
@@ -151,6 +195,11 @@ namespace CookingBook.View
                 }
                 this.stackPanelInstrucions.Children.RemoveAt(indexRemove);
             }
+        }
+
+        private void ButtonCancelClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

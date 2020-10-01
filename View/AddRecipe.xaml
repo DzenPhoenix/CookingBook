@@ -14,11 +14,11 @@
             </DockPanel>
             <DockPanel >
                 <TextBlock  FontSize="30" Text ="Choose or enter category:" DockPanel.Dock="Left" Margin="10"></TextBlock>
-                <ComboBox FontSize="30" Margin="10" IsEditable="True" BorderThickness="2"></ComboBox>
+                <ComboBox x:Name="comboBoxCategory" FontSize="30" Margin="10" IsEditable="True" BorderThickness="2"></ComboBox>
             </DockPanel>
             <DockPanel >
                 <TextBlock  FontSize="30" Text ="Choose or enter kitchen:"  DockPanel.Dock="Left" Margin="10"></TextBlock>
-                <ComboBox FontSize="30" Margin="10" IsEditable="True"  BorderThickness="2"></ComboBox>
+                <ComboBox x:Name="comboBoxKitchen" FontSize="30" Margin="10" IsEditable="True"  BorderThickness="2"></ComboBox>
             </DockPanel>
             <DockPanel>
                 <StackPanel Orientation="Vertical">
@@ -35,7 +35,7 @@
             <TextBlock Text="Add recipe ingridients and comments:" FontSize="30" Margin="10" HorizontalAlignment="Center" DockPanel.Dock="Top"></TextBlock>
             <StackPanel x:Name="stackPanelIngridients" Orientation="Vertical">
                 <DockPanel LastChildFill="True">
-                    <ComboBox DockPanel.Dock="Left" FontSize="30" Margin="10" BorderThickness="2" Width="300" IsEditable="True"></ComboBox>
+                    <ComboBox x:Name="comboBoxIngridient" DockPanel.Dock="Left" FontSize="30" Margin="10" BorderThickness="2" Width="300" IsEditable="True"></ComboBox>
                     <Button DockPanel.Dock="Right" Content="+" FontSize="30" Width="50" Margin="10" Tag="0" Click="ButtonIngridientClick"></Button>
                     <TextBox  FontSize="30" Margin="10" BorderThickness="2"></TextBox>
                 </DockPanel>
@@ -55,7 +55,7 @@
             </StackPanel>
             <DockPanel LastChildFill="True">
                 <Button Content="Save recipe" DockPanel.Dock="Top" FontSize="30" Margin="10"></Button>
-                <Button Content="Cancel adding" DockPanel.Dock="Right" FontSize="30" Margin="10" ></Button>
+                <Button Content="Cancel adding" DockPanel.Dock="Right" FontSize="30" Margin="10" Click="ButtonCancelClick"></Button>
             </DockPanel>
         </StackPanel>
     </ScrollViewer>

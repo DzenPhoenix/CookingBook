@@ -21,33 +21,47 @@
             </Menu>
         </StackPanel>
        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="LeftPanel" Orientation="Vertical" DockPanel.Dock="Left" Width="auto">
+            <StackPanel x:Name="LeftPanel" Orientation="Vertical" DockPanel.Dock="Left" Width="200">
                 <TextBlock Text="Filter" HorizontalAlignment="Center" FontSize="20"></TextBlock>
                 <Separator></Separator>
                 <TextBlock Text="Category" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
                 <Separator></Separator>
-                <ListBox x:Name="listBoxCategory" Height="auto" FontSize="20" FontStyle="Italic">
-                    <CheckBox Content="All/Clear" IsChecked="True" Foreground="blue" Click="CheckBoxClickAllCategory"></CheckBox>
-                </ListBox>
+                <Expander>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListBox x:Name="listBoxCategory" Height="200" FontSize="20" FontStyle="Italic">
+                            <CheckBox Content="All/Clear" IsChecked="True" Foreground="blue" Click="CheckBoxClickAllCategory"></CheckBox>
+                        </ListBox>
+                    </ScrollViewer>
+                </Expander>
                 <Separator></Separator>
                 <TextBlock Text="Kitchen" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
                 <Separator></Separator>
-                <ListBox x:Name="listBoxKitchen" Height="auto" FontSize="20" FontStyle="Italic">
-                    <CheckBox Content="All/Clear" IsChecked="True" Foreground="Blue" Click = "CheckBoxClickAllKitchen"></CheckBox>
-                </ListBox>
+                <Expander>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListBox x:Name="listBoxKitchen" Height="200" FontSize="20" FontStyle="Italic">
+                            <CheckBox Content="All/Clear" IsChecked="True" Foreground="Blue" Click = "CheckBoxClickAllKitchen"></CheckBox>
+                        </ListBox>
+                    </ScrollViewer>
+                </Expander>
                 <Separator></Separator>
                 <TextBlock Text="Ingridients" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
-                <ListBox x:Name="listBoxIngridients" Height="auto" FontSize="20" FontStyle="Italic">
-                    <CheckBox Content="All/Clear" IsChecked="True" Foreground="Blue"  Click = "CheckBoxClickAllIngridients"></CheckBox>
-                </ListBox>
+                <Expander>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListBox x:Name="listBoxIngridients" Height="200" FontSize="20" FontStyle="Italic">
+                            <CheckBox Content="All/Clear" IsChecked="True" Foreground="Blue"  Click = "CheckBoxClickAllIngridients"></CheckBox>
+                        </ListBox>
+                    </ScrollViewer>
+                </Expander>
                 <Separator></Separator>
                 <Button x:Name="buttonFilter" Content="Filter" Height="30" FontSize="20" Margin="10" Click="ButtonFilterClick" Command="{Binding FilterCommand}" ></Button>
             </StackPanel>
         </ScrollViewer>
         <Button x:Name="buttonExpanderLeft" Content="&lt;&lt;" DockPanel.Dock="Left" Width="20" Click="ButtonExpanderLeftClick"></Button>
-        <StackPanel x:Name="RightPanel" Orientation="Vertical" DockPanel.Dock="Right" Width="auto">
+        <StackPanel x:Name="RightPanel" Orientation="Vertical" DockPanel.Dock="Right" Width="300">
             <TextBlock Text="Filtered recipes" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
-            <ListBox x:Name="listBoxFilteredRecipes" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue" ItemsSource="{Binding FilteredRecipes}" MouseDoubleClick="ListBoxFilteredRecipesMouseDoubleClick"></ListBox>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListBox x:Name="listBoxFilteredRecipes" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue" ItemsSource="{Binding FilteredRecipes}" MouseDoubleClick="ListBoxFilteredRecipesMouseDoubleClick"></ListBox>
+            </ScrollViewer>
         </StackPanel>
         <Button x:Name="buttonExpanderRight" Content="&gt;&gt;" DockPanel.Dock="Right" Width="20" Click="ButtonExpanderRightClick"></Button>
         <ScrollViewer VerticalScrollBarVisibility="Auto" >
@@ -59,7 +73,7 @@
                 </StackPanel>
                 <Image x:Name="imageMainPicture" Source="{Binding SelectedRecipe.MainPictureAdress, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"></Image>
                 <GroupBox Header="Description:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20">
-                    <TextBlock x:Name="textBlockDescription" Text="{Binding SelectedRecipe.Description, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" FontSize="20"></TextBlock>
+                    <TextBlock x:Name="textBlockDescription" Height="auto" Text="{Binding SelectedRecipe.Description, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" FontSize="20"></TextBlock>
                 </GroupBox>
                 <GroupBox x:Name="groupBoxIngridients" Header="Ingridients:" Height="auto" BorderThickness="2" BorderBrush="Blue" FontSize="20">
                     <ListBox ItemsSource="{Binding SelectedRecipe.Ingridients}" FontSize="20" FontStyle="Italic" Foreground="blue"></ListBox>
