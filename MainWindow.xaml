@@ -60,7 +60,8 @@
         <StackPanel x:Name="RightPanel" Orientation="Vertical" DockPanel.Dock="Right" Width="300">
             <TextBlock Text="Filtered recipes" HorizontalAlignment="Center" FontSize="16" FontWeight="UltraBlack"></TextBlock>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ListBox x:Name="listBoxFilteredRecipes" Height="auto" FontSize="20" FontStyle="Italic" Foreground="blue" ItemsSource="{Binding FilteredRecipes}" MouseDoubleClick="ListBoxFilteredRecipesMouseDoubleClick"></ListBox>
+                <ListBox x:Name="listBoxFilteredRecipes" Height="300
+                         " FontSize="20" FontStyle="Italic" Foreground="blue" ItemsSource="{Binding FilteredRecipes}" MouseDoubleClick="ListBoxFilteredRecipesMouseDoubleClick"></ListBox>
             </ScrollViewer>
         </StackPanel>
         <Button x:Name="buttonExpanderRight" Content="&gt;&gt;" DockPanel.Dock="Right" Width="20" Click="ButtonExpanderRightClick"></Button>

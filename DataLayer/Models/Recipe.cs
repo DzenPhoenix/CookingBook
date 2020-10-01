@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CookingBook.DataLayer.Contexts;
+using CookingBook.ViewModel;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,6 +23,45 @@ namespace CookingBook.DataLayer.Models
         public string SerializedInstructions { get; set; }
         public int? KitchenId { get; set; }
         public Kitchen Kitchen { get; set; }
+
+        public Recipe(){}
+        public Recipe(RecipeViewModel recipeView)
+        {
+            string serializedIngridients = JsonConvert.SerializeObject(recipeView.Ingridients);
+            string serializedInstructions = JsonConvert.SerializeObject(recipeView.Instructions);
+
+            this.Name = recipeView.Name;
+
+            int categoryId = 0;
+            int kitchenId = 0;
+            using (CookingBookContext db = new CookingBookContext())
+            {
+                categoryId = (from category in db.Categories
+                              where category.Name == recipeView.Category
+                              select category.CategoryId).FirstOrDefault();
+
+                kitchenId = (from kitchen in db.Kitchens
+                             where kitchen.Name == recipeView.Kitchen
+                             select kitchen.KitchenId).FirstOrDefault();
+            }
+            if (categoryId != 0)
+            {
+                this.CategoryId = categoryId;
+            }
+            else
+            {
+                this.Category = new Category() { Name = recipeView.Category };
+            }
+            if (kitchenId != 0)
+            {
+                this.KitchenId = kitchenId;
+            }
+            else { this.Kitchen = new Kitchen() { Name = recipeView.Kitchen }; }
+            this.MainPictureAdress = recipeView.MainPictureAdress;
+            this.Description = recipeView.Description;
+            this.SerializedIngridients = serializedIngridients;
+            this.SerializedInstructions = serializedInstructions;
+        }
     }
 
 }

@@ -206,6 +206,11 @@ namespace CookingBook
         {
             AddRecipe addForm = new AddRecipe();
             addForm.ShowDialog();
+            this.DataContext = new CookingBookViewModel();
+            this.listBoxCategory.Items.Clear();
+            this.listBoxKitchen.Items.Clear();
+            this.listBoxIngridients.Items.Clear();
+            InitializeDynamicComponent();
         }
     }
 }
