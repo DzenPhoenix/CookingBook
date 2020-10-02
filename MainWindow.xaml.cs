@@ -212,5 +212,17 @@ namespace CookingBook
             this.listBoxIngridients.Items.Clear();
             InitializeDynamicComponent();
         }
+
+        
+        private void EditRecipeClick(object sender, RoutedEventArgs e)
+        {
+            EditRecipe editForm = new EditRecipe((this.DataContext as CookingBookViewModel).SelectedRecipe);
+            editForm.ShowDialog();
+            this.DataContext = new CookingBookViewModel();
+            this.listBoxCategory.Items.Clear();
+            this.listBoxKitchen.Items.Clear();
+            this.listBoxIngridients.Items.Clear();
+            InitializeDynamicComponent();
+        }
     }
 }

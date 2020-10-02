@@ -14,7 +14,7 @@
                 </MenuItem>
                 <MenuItem Header="Edit" Background="AntiqueWhite">
                     <MenuItem Header="New Recipe" Click="AddRecipeClick"></MenuItem>
-                    <MenuItem Header="Edit Recipe"></MenuItem>
+                    <MenuItem Header="Edit Recipe" Click="EditRecipeClick"></MenuItem>
                     <MenuItem Header="Delete Recipe"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="About" Background="AntiqueWhite"></MenuItem>
