@@ -3,8 +3,12 @@ using CookingBook.DataLayer.Models;
 using CookingBook.Service;
 using CookingBook.View;
 using CookingBook.ViewModel;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -215,11 +219,8 @@ namespace CookingBook
         {
             AddRecipe addForm = new AddRecipe();
             addForm.ShowDialog();
-            this.DataContext = new CookingBookViewModel();
-            this.listBoxCategory.Items.Clear();
-            this.listBoxKitchen.Items.Clear();
-            this.listBoxIngridients.Items.Clear();
-            InitializeDynamicComponent();
+            RecipeViewModel selectedRecipe = (this.DataContext as CookingBookViewModel).SelectedRecipe;
+            RefreshDataContext(selectedRecipe);
         }
 
         
@@ -228,14 +229,7 @@ namespace CookingBook
             RecipeViewModel selectedRecipe = (this.DataContext as CookingBookViewModel).SelectedRecipe;
             EditRecipe editForm = new EditRecipe(selectedRecipe);
             editForm.ShowDialog();
-
-            this.DataContext = new CookingBookViewModel();
-            this.listBoxCategory.Items.Clear();
-            this.listBoxKitchen.Items.Clear();
-            this.listBoxIngridients.Items.Clear();
-            InitializeDynamicComponent();
-            RecipeViewModel newSelectedRecipe = FindRecipe(selectedRecipe);
-            ShowRecipe(newSelectedRecipe);
+            RefreshDataContext(selectedRecipe);
         }
 
         private RecipeViewModel FindRecipe(RecipeViewModel recipeView)
@@ -275,18 +269,103 @@ namespace CookingBook
                     MessageBox.Show("You cant delete last recipe", "Warning", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            this.DataContext = new CookingBookViewModel();
-            this.listBoxCategory.Items.Clear();
-            this.listBoxKitchen.Items.Clear();
-            this.listBoxIngridients.Items.Clear();
-            InitializeDynamicComponent();
-            RecipeViewModel newSelectedRecipe = FindRecipe(selectedRecipe);
-            ShowRecipe(newSelectedRecipe);
+            RefreshDataContext(selectedRecipe);
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void RefreshDataContext(RecipeViewModel selectedRecipe)
+        {
+            this.DataContext = new CookingBookViewModel();
+            this.listBoxCategory.Items.Clear();
+            CheckBox box = new CheckBox() { Content = "All/Clear", IsChecked = true, Foreground = Brushes.Blue }; box.Click += CheckBoxClickAllCategory;
+            this.listBoxCategory.Items.Add(box);
+            this.listBoxKitchen.Items.Clear();
+            box = new CheckBox() { Content = "All/Clear", IsChecked = true, Foreground = Brushes.Blue }; box.Click += CheckBoxClickAllKitchen;
+            this.listBoxKitchen.Items.Add(box);
+            this.listBoxIngridients.Items.Clear();
+            box = new CheckBox() { Content = "All/Clear", IsChecked = true, Foreground = Brushes.Blue }; box.Click += CheckBoxClickAllIngridients;
+            this.listBoxIngridients.Items.Add(box);
+            InitializeDynamicComponent();
+            RecipeViewModel newSelectedRecipe = FindRecipe(selectedRecipe);
+            ShowRecipe(newSelectedRecipe);
+        }
+
+        private void SaveToPdfClick(object sender, RoutedEventArgs e)
+        {
+            
+            Document document = CreateDocument();
+            document.UseCmykColor = true;
+            const bool unicode = true;
+            const PdfFontEmbedding embedding = PdfFontEmbedding.Always;
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(unicode, embedding);
+            pdfRenderer.Document = document;
+            pdfRenderer.RenderDocument();
+            const string filename ="Recipe.pdf";
+            pdfRenderer.PdfDocument.Save(filename);
+            Process.Start(filename);
+        }
+
+        private Document CreateDocument()
+        {
+            RecipeViewModel selectedRecipe = (this.DataContext as CookingBookViewModel).SelectedRecipe;
+            Document document = new Document();
+            MigraDoc.DocumentObjectModel.Section section = document.AddSection();
+            section.PageSetup.TopMargin = 10;
+            section.PageSetup.BottomMargin = 10;
+            MigraDoc.DocumentObjectModel.Paragraph paragraphName = section.AddParagraph();
+            paragraphName.AddFormattedText(selectedRecipe.Name);
+            paragraphName.Format.Font.Size = 30;
+            paragraphName.Format.Alignment = ParagraphAlignment.Center;
+
+            MigraDoc.DocumentObjectModel.Paragraph paragraphComment = section.AddParagraph();
+            paragraphComment.AddFormattedText(selectedRecipe.Category + "," + selectedRecipe.Kitchen);
+            paragraphComment.Format.Alignment = ParagraphAlignment.Center;
+            paragraphComment.Format.Font.Size = 10;
+            paragraphComment.Format.Font.Color = MigraDoc.DocumentObjectModel.Colors.Blue;
+
+            MigraDoc.DocumentObjectModel.Shapes.Image mainImage = section.AddImage(selectedRecipe.MainPictureAdress);
+            mainImage.Width = 500;
+
+
+            MigraDoc.DocumentObjectModel.Paragraph paragraphDescriptions = section.AddParagraph();
+            paragraphDescriptions.AddFormattedText(selectedRecipe.Description);
+            paragraphDescriptions.AddLineBreak();
+
+            MigraDoc.DocumentObjectModel.Paragraph paragraphIngridients = section.AddParagraph();
+            paragraphIngridients.Format.Alignment = ParagraphAlignment.Left;
+            paragraphIngridients.Format.Font.Italic = true;
+            paragraphIngridients.Format.Font.Color = MigraDoc.DocumentObjectModel.Colors.Blue;
+            paragraphIngridients.AddLineBreak();
+            paragraphIngridients.AddFormattedText("Ingridients: ");
+            paragraphIngridients.AddLineBreak();
+            foreach (IngridientViewModel ingridientView in selectedRecipe.Ingridients)
+            {
+                paragraphIngridients.AddLineBreak();
+                paragraphIngridients.AddFormattedText(ingridientView.ToString());
+            }
+            paragraphIngridients.AddLineBreak();
+
+            MigraDoc.DocumentObjectModel.Paragraph InstructionParagraph = section.AddParagraph();
+            InstructionParagraph.Format.KeepTogether = false;
+            MigraDoc.DocumentObjectModel.Shapes.Image instructionImage;
+            
+            InstructionParagraph.AddLineBreak();
+            InstructionParagraph.AddFormattedText("Istructions:",TextFormat.Italic);
+            InstructionParagraph.AddLineBreak();
+            for (int i = 0; i < selectedRecipe.Instructions.Count; i++)
+            {
+                InstructionParagraph.AddFormattedText($"{ i + 1}) " + selectedRecipe.Instructions[i].Name);
+                InstructionParagraph.AddLineBreak();
+                instructionImage = InstructionParagraph.AddImage(selectedRecipe.Instructions[i].ImageSource);
+                instructionImage.Height = 200;
+                InstructionParagraph.AddLineBreak();
+            }
+
+            return document;
         }
     }
 }

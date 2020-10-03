@@ -55,7 +55,7 @@
             </StackPanel>
             <DockPanel LastChildFill="True">
                 <Button Content="Save recipe" DockPanel.Dock="Top" FontSize="30" Margin="10" Click="ButtonSaveRecipeClick"></Button>
-                <Button Content="Cancel adding" DockPanel.Dock="Right" FontSize="30" Margin="10" Click="ButtonCancelClick"></Button>
+                <Button Content="Cancel edit" DockPanel.Dock="Right" FontSize="30" Margin="10" Click="ButtonCancelClick"></Button>
             </DockPanel>
         </StackPanel>
     </ScrollViewer>

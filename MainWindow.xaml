@@ -10,6 +10,7 @@
         <StackPanel Orientation="Horizontal" Height="20"   DockPanel.Dock="Top" Background="AntiqueWhite">
             <Menu x:Name="File">
                 <MenuItem Header="File" Background="AntiqueWhite">
+                    <MenuItem Header="Save as PDF" Click="SaveToPdfClick"></MenuItem>
                     <MenuItem Header="Exit" Click="ExitClick"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Edit" Background="AntiqueWhite">
