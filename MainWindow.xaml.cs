@@ -1,4 +1,5 @@
 ﻿using CookingBook.DataLayer.Contexts;
+using CookingBook.DataLayer.Models;
 using CookingBook.Service;
 using CookingBook.View;
 using CookingBook.ViewModel;
@@ -239,7 +240,7 @@ namespace CookingBook
 
         private RecipeViewModel FindRecipe(RecipeViewModel recipeView)
         {
-            int index = -1;
+            int index = 0;
             for ( int i=0;i< this.listBoxFilteredRecipes.Items.Count;i++)
             {
                 if ((this.listBoxFilteredRecipes.Items[i] as RecipeViewModel).Name == recipeView.Name)
@@ -250,5 +251,42 @@ namespace CookingBook
             return this.listBoxFilteredRecipes.Items[index] as RecipeViewModel;
         }
 
+        private void DeleteRecipeClick(object sender, RoutedEventArgs e)
+        {
+            RecipeViewModel selectedRecipe = (this.DataContext as CookingBookViewModel).SelectedRecipe;
+            string name = selectedRecipe.Name;
+            
+            if (MessageBox.Show($"You really want delete {name}","Warning",MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                if (this.listBoxFilteredRecipes.Items.Count > 1)
+                {
+                    using (CookingBookContext db = new CookingBookContext())
+                    {
+                        Recipe recipe = (from rec in db.Recipes
+                                         where rec.Name == name
+                                         select rec).FirstOrDefault();
+
+                        db.Recipes.Remove(recipe);
+                        db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You cant delete last recipe", "Warning", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            this.DataContext = new CookingBookViewModel();
+            this.listBoxCategory.Items.Clear();
+            this.listBoxKitchen.Items.Clear();
+            this.listBoxIngridients.Items.Clear();
+            InitializeDynamicComponent();
+            RecipeViewModel newSelectedRecipe = FindRecipe(selectedRecipe);
+            ShowRecipe(newSelectedRecipe);
+        }
+
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

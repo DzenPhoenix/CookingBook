@@ -10,14 +10,13 @@
         <StackPanel Orientation="Horizontal" Height="20"   DockPanel.Dock="Top" Background="AntiqueWhite">
             <Menu x:Name="File">
                 <MenuItem Header="File" Background="AntiqueWhite">
-                    <MenuItem Header="Exit"></MenuItem>
+                    <MenuItem Header="Exit" Click="ExitClick"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Edit" Background="AntiqueWhite">
                     <MenuItem Header="New Recipe" Click="AddRecipeClick"></MenuItem>
                     <MenuItem Header="Edit Recipe" Click="EditRecipeClick"></MenuItem>
-                    <MenuItem Header="Delete Recipe"></MenuItem>
+                    <MenuItem Header="Delete Recipe" Click="DeleteRecipeClick"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="About" Background="AntiqueWhite"></MenuItem>
             </Menu>
         </StackPanel>
        <ScrollViewer VerticalScrollBarVisibility="Auto">
