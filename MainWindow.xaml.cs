@@ -367,5 +367,22 @@ namespace CookingBook
 
             return document;
         }
+
+        private void TextBoxSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = (sender as TextBox).Text;
+            
+            List<RecipeViewModel> allRecipes = CookingBookViewModel.GetAllRecipes();
+            List<RecipeViewModel> searchedRecipes = new List<RecipeViewModel>();
+                foreach (RecipeViewModel recipeView in allRecipes)
+                {
+
+                    if (recipeView.Name.StartsWith(searchText, StringComparison.OrdinalIgnoreCase) && searchText != String.Empty)
+                    {
+                        searchedRecipes.Add(recipeView);
+                    }
+                }
+                this.listBoxSearch.ItemsSource = searchedRecipes;
+        }
     }
 }

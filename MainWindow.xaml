@@ -63,6 +63,13 @@
                 <ListBox x:Name="listBoxFilteredRecipes" Height="300
                          " FontSize="20" FontStyle="Italic" Foreground="blue" ItemsSource="{Binding FilteredRecipes}" MouseDoubleClick="ListBoxFilteredRecipesMouseDoubleClick"></ListBox>
             </ScrollViewer>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Search:" FontSize="20"></TextBlock>
+                <TextBox x:Name="textBoxSearch" FontSize="20" FontStyle="Italic" Width="230" TextChanged="TextBoxSearchTextChanged"></TextBox>
+            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListBox x:Name="listBoxSearch" FontSize="20" FontStyle="Italic" Foreground="Blue"  Height="250" MouseDoubleClick="ListBoxFilteredRecipesMouseDoubleClick"></ListBox>
+            </ScrollViewer>
         </StackPanel>
         <Button x:Name="buttonExpanderRight" Content="&gt;&gt;" DockPanel.Dock="Right" Width="20" Click="ButtonExpanderRightClick"></Button>
         <ScrollViewer VerticalScrollBarVisibility="Auto" >

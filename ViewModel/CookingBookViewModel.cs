@@ -66,12 +66,8 @@ namespace CookingBook.ViewModel
 
         }
 
-        public void CookingBookViewModelInit()
-        {
 
-        }
-
-        private List<RecipeViewModel> GetAllRecipes()
+        public static List<RecipeViewModel> GetAllRecipes()
         {
             List<Recipe> recipes = new List<Recipe>();
             List<RecipeViewModel> res = new List<RecipeViewModel>();
