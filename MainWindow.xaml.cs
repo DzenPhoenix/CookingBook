@@ -183,22 +183,30 @@ namespace CookingBook
         private void ListBoxFilteredRecipesMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             RecipeViewModel selectedRecipe = (sender as ListBox).SelectedItem as RecipeViewModel;
-            (this.DataContext as CookingBookViewModel).SelectedRecipe = selectedRecipe;
-            this.stackPanelInstruction.Children.Clear();
-            foreach (InstructionViewModel instruction in selectedRecipe.Instructions)
+            ShowRecipe(selectedRecipe);     
+        }
+
+        private void ShowRecipe(RecipeViewModel selectedRecipe)
+        {
+            if (selectedRecipe != null)
             {
-                DockPanel panel = new DockPanel();
-                Image image = new Image()
+                (this.DataContext as CookingBookViewModel).SelectedRecipe = selectedRecipe;
+                this.stackPanelInstruction.Children.Clear();
+                foreach (InstructionViewModel instruction in selectedRecipe.Instructions)
                 {
-                    MaxWidth = 300,
-                    Stretch = Stretch.UniformToFill,
-                    Source = (new ImageSourceConverter().ConvertFromString(instruction.ImageSource) as ImageSource)
-                };
-                DockPanel.SetDock(image, Dock.Left);
-                panel.Children.Add(image);
-                panel.Children.Add(new TextBlock { Text = instruction.Name, TextWrapping = TextWrapping.Wrap });
-                this.stackPanelInstruction.Children.Add(panel);
-                this.stackPanelInstruction.Children.Add(new Separator());
+                    DockPanel panel = new DockPanel();
+                    Image image = new Image()
+                    {
+                        MaxWidth = 300,
+                        Stretch = Stretch.UniformToFill,
+                        Source = (new ImageSourceConverter().ConvertFromString(instruction.ImageSource) as ImageSource)
+                    };
+                    DockPanel.SetDock(image, Dock.Left);
+                    panel.Children.Add(image);
+                    panel.Children.Add(new TextBlock { Text = instruction.Name, TextWrapping = TextWrapping.Wrap });
+                    this.stackPanelInstruction.Children.Add(panel);
+                    this.stackPanelInstruction.Children.Add(new Separator());
+                }
             }
         }
 
@@ -216,13 +224,31 @@ namespace CookingBook
         
         private void EditRecipeClick(object sender, RoutedEventArgs e)
         {
-            EditRecipe editForm = new EditRecipe((this.DataContext as CookingBookViewModel).SelectedRecipe);
+            RecipeViewModel selectedRecipe = (this.DataContext as CookingBookViewModel).SelectedRecipe;
+            EditRecipe editForm = new EditRecipe(selectedRecipe);
             editForm.ShowDialog();
+
             this.DataContext = new CookingBookViewModel();
             this.listBoxCategory.Items.Clear();
             this.listBoxKitchen.Items.Clear();
             this.listBoxIngridients.Items.Clear();
             InitializeDynamicComponent();
+            RecipeViewModel newSelectedRecipe = FindRecipe(selectedRecipe);
+            ShowRecipe(newSelectedRecipe);
         }
+
+        private RecipeViewModel FindRecipe(RecipeViewModel recipeView)
+        {
+            int index = -1;
+            for ( int i=0;i< this.listBoxFilteredRecipes.Items.Count;i++)
+            {
+                if ((this.listBoxFilteredRecipes.Items[i] as RecipeViewModel).Name == recipeView.Name)
+                {
+                    index = i;break;
+                }
+            }
+            return this.listBoxFilteredRecipes.Items[index] as RecipeViewModel;
+        }
+
     }
 }

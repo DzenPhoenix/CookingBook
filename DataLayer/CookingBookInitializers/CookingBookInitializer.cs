@@ -98,16 +98,16 @@ namespace CookingBook.DataLayer.CookingBookInitializers
             IngridientViewModel ing_2_11= new IngridientViewModel { Name = "Яйцо куриное", Comment = "(взбейте, для смазывания) — 1 шт" };
             recipeView_1.Ingridients.AddRange(new List<IngridientViewModel>() { ing_2_1, ing_2_2, ing_2_3, ing_2_4, ing_2_5, ing_2_6, ing_2_7, ing_2_8, ing_2_9, ing_2_10, ing_2_11 });
 
-            InstructionViewModel ins_2_1 = new InstructionViewModel { Name = "Бедро индейки нужно предварительно запечь. Я обычно ставлю запекаться на ночь. Бедро индейки посолите и поперчите, приправьте итальянскими травами, хорошо заверните в фольгу и запекайте при температуре 200 градусов 2 часа.", ImageSource = @".\res\pic\2\1.jpg" };
-            InstructionViewModel ins_2_2 = new InstructionViewModel { Name = "Дрожжи растворите в тёплой воде, добавьте сахар, 1 ст. л. муки, хорошо перемешайте и дайте постоять 10 мин.", ImageSource = @".\res\pic\2\2.jpg" };
-            InstructionViewModel ins_2_3 = new InstructionViewModel { Name = "Добавьте муку, соль, растительное масло и замесите тесто. Накройте чтобы не обветрилось и поставьте в тёплое место на 1,5 часа.", ImageSource = @".\res\pic\2\3.jpg" };
-            InstructionViewModel ins_2_4 = new InstructionViewModel { Name = "Приготовим начинку: индейку нарежьте маленькими кусочками.", ImageSource = @".\res\pic\2\4.jpg" };
-            InstructionViewModel ins_2_5 = new InstructionViewModel { Name = "Яблоко очистите от кожуры, удалите сердцевину и нарежьте маленькими тонкими кусочками.", ImageSource = @".\res\pic\2\5.jpg" };
-            InstructionViewModel ins_2_6 = new InstructionViewModel { Name = "Лук-порей нарежьте тонкими кольцами.", ImageSource = @".\res\pic\2\6.jpg" };
-            InstructionViewModel ins_2_7 = new InstructionViewModel { Name = "Смешайте в миске индейку, яблоки, лук-порей, горчицу и листики тимьяна.", ImageSource = @".\res\pic\2\7.jpg" };
-            InstructionViewModel ins_2_8 = new InstructionViewModel { Name = "Раскатайте половину теста в пласт толщиной 1 см.", ImageSource = @".\res\pic\2\8.jpg" };
-            InstructionViewModel ins_2_9 = new InstructionViewModel { Name = "Равномерно выложите половину начинки, края смажьте яйцом и плотно заверните в рулет, разрежьте на три части. Также заверните второй рулет.", ImageSource = @".\res\pic\2\9.jpg" };
-            InstructionViewModel ins_2_10 = new InstructionViewModel { Name = "Выложите рулетики на противень застеленной пергаментом или силиконовым ковриком. Смажьте рулеты оставшимся яйцом. Запекайте в предварительно нагретой до 180 градусов духовке 25", ImageSource = @".\res\pic\2\10.jpg" };
+            InstructionViewModel ins_2_1 = new InstructionViewModel { Name = "Бедро индейки нужно предварительно запечь. Я обычно ставлю запекаться на ночь. Бедро индейки посолите и поперчите, приправьте итальянскими травами, хорошо заверните в фольгу и запекайте при температуре 200 градусов 2 часа.", ImageSource = @".\Res\pic\2\1.jpg" };
+            InstructionViewModel ins_2_2 = new InstructionViewModel { Name = "Дрожжи растворите в тёплой воде, добавьте сахар, 1 ст. л. муки, хорошо перемешайте и дайте постоять 10 мин.", ImageSource = @".\Res\pic\2\2.jpg" };
+            InstructionViewModel ins_2_3 = new InstructionViewModel { Name = "Добавьте муку, соль, растительное масло и замесите тесто. Накройте чтобы не обветрилось и поставьте в тёплое место на 1,5 часа.", ImageSource = @".\Res\pic\2\3.jpg" };
+            InstructionViewModel ins_2_4 = new InstructionViewModel { Name = "Приготовим начинку: индейку нарежьте маленькими кусочками.", ImageSource = @".\Res\pic\2\4.jpg" };
+            InstructionViewModel ins_2_5 = new InstructionViewModel { Name = "Яблоко очистите от кожуры, удалите сердцевину и нарежьте маленькими тонкими кусочками.", ImageSource = @".\Res\pic\2\5.jpg" };
+            InstructionViewModel ins_2_6 = new InstructionViewModel { Name = "Лук-порей нарежьте тонкими кольцами.", ImageSource = @".\Res\pic\2\6.jpg" };
+            InstructionViewModel ins_2_7 = new InstructionViewModel { Name = "Смешайте в миске индейку, яблоки, лук-порей, горчицу и листики тимьяна.", ImageSource = @".\Res\pic\2\7.jpg" };
+            InstructionViewModel ins_2_8 = new InstructionViewModel { Name = "Раскатайте половину теста в пласт толщиной 1 см.", ImageSource = @".\Res\pic\2\8.jpg" };
+            InstructionViewModel ins_2_9 = new InstructionViewModel { Name = "Равномерно выложите половину начинки, края смажьте яйцом и плотно заверните в рулет, разрежьте на три части. Также заверните второй рулет.", ImageSource = @".\Res\pic\2\9.jpg" };
+            InstructionViewModel ins_2_10 = new InstructionViewModel { Name = "Выложите рулетики на противень застеленной пергаментом или силиконовым ковриком. Смажьте рулеты оставшимся яйцом. Запекайте в предварительно нагретой до 180 градусов духовке 25", ImageSource = @".\Res\pic\2\10.jpg" };
             recipeView_1.Instructions.AddRange(new List<InstructionViewModel>() { ins_2_1, ins_2_2, ins_2_3, ins_2_4, ins_2_5, ins_2_6, ins_2_7, ins_2_8, ins_2_9, ins_2_10 });
 
             serializedIngridients = JsonConvert.SerializeObject(recipeView_1.Ingridients);
@@ -149,17 +149,17 @@ namespace CookingBook.DataLayer.CookingBookInitializers
             InstructionViewModel ins_3_1 = new InstructionViewModel { Name = "Необходимые продукты.", ImageSource = @".\Res\pic\3\1.jpg" };
             InstructionViewModel ins_3_2 = new InstructionViewModel { Name = "Сладкий перец шинкуем тонкой соломкой.", ImageSource = @".\Res\pic\3\2.jpg" };
             InstructionViewModel ins_3_3 = new InstructionViewModel { Name = "У огурцов отрезаем кончики и нарезаем их вдоль узкими длинными брусочками.", ImageSource = @".\Res\pic\3\3.jpg" };
-            InstructionViewModel ins_3_4 = new InstructionViewModel { Name = "Складываем их в миску, пересыпаем солью и оставляем на 15-20 минут, чтобы пустили сок.", ImageSource = @".\res\pic\3\4.jpg" };
-            InstructionViewModel ins_3_5 = new InstructionViewModel { Name = "Лук шинкуем полукольцами.", ImageSource = @".\res\pic\3\5.jpg" };
-            InstructionViewModel ins_3_6 = new InstructionViewModel { Name = "Чеснок мелко рубим.", ImageSource = @".\res\pic\3\6.jpg" };
-            InstructionViewModel ins_3_7 = new InstructionViewModel { Name = "Мясо режем тонкой соломкой.", ImageSource = @".\res\pic\3\7.jpg" };
-            InstructionViewModel ins_3_8 = new InstructionViewModel { Name = "Хорошенько разогреваем сковородку с растительным маслом. Обжариваем мясо на сильном огне, постоянно помешивая.", ImageSource = @".\res\pic\3\8.jpg" };
-            InstructionViewModel ins_3_9 = new InstructionViewModel { Name = "Огурцы немного отжимаем и сливаем сок. На них кучкой выкладываем красный острый перец, кориандр и сахар.", ImageSource = @".\res\pic\3\9.jpg" };
-            InstructionViewModel ins_3_10 = new InstructionViewModel { Name = "Сверху засыпаем луком и сладким перцем.", ImageSource = @".\res\pic\3\10.jpg" };
-            InstructionViewModel ins_3_11 = new InstructionViewModel { Name = "Добавляем соль и заливаем содержимым сковороды.", ImageSource = @".\res\pic\3\11.jpg" };
-            InstructionViewModel ins_3_12 = new InstructionViewModel { Name = "Перемешиваем.", ImageSource = @".\res\pic\3\12.jpg" };
-            InstructionViewModel ins_3_13 = new InstructionViewModel { Name = "Добавляем чеснок, уксус и соевый соус.", ImageSource = @".\res\pic\3\13.jpg" };
-            InstructionViewModel ins_3_14 = new InstructionViewModel { Name = "Перемешиваем еще раз.", ImageSource = @".\res\pic\3\14.jpg" };
+            InstructionViewModel ins_3_4 = new InstructionViewModel { Name = "Складываем их в миску, пересыпаем солью и оставляем на 15-20 минут, чтобы пустили сок.", ImageSource = @".\Res\pic\3\4.jpg" };
+            InstructionViewModel ins_3_5 = new InstructionViewModel { Name = "Лук шинкуем полукольцами.", ImageSource = @".\Res\pic\3\5.jpg" };
+            InstructionViewModel ins_3_6 = new InstructionViewModel { Name = "Чеснок мелко рубим.", ImageSource = @".\Res\pic\3\6.jpg" };
+            InstructionViewModel ins_3_7 = new InstructionViewModel { Name = "Мясо режем тонкой соломкой.", ImageSource = @".\Res\pic\3\7.jpg" };
+            InstructionViewModel ins_3_8 = new InstructionViewModel { Name = "Хорошенько разогреваем сковородку с растительным маслом. Обжариваем мясо на сильном огне, постоянно помешивая.", ImageSource = @".\Res\pic\3\8.jpg" };
+            InstructionViewModel ins_3_9 = new InstructionViewModel { Name = "Огурцы немного отжимаем и сливаем сок. На них кучкой выкладываем красный острый перец, кориандр и сахар.", ImageSource = @".\Res\pic\3\9.jpg" };
+            InstructionViewModel ins_3_10 = new InstructionViewModel { Name = "Сверху засыпаем луком и сладким перцем.", ImageSource = @".\Res\pic\3\10.jpg" };
+            InstructionViewModel ins_3_11 = new InstructionViewModel { Name = "Добавляем соль и заливаем содержимым сковороды.", ImageSource = @".\Res\pic\3\11.jpg" };
+            InstructionViewModel ins_3_12 = new InstructionViewModel { Name = "Перемешиваем.", ImageSource = @".\Res\pic\3\12.jpg" };
+            InstructionViewModel ins_3_13 = new InstructionViewModel { Name = "Добавляем чеснок, уксус и соевый соус.", ImageSource = @".\Res\pic\3\13.jpg" };
+            InstructionViewModel ins_3_14 = new InstructionViewModel { Name = "Перемешиваем еще раз.", ImageSource = @".\Res\pic\3\14.jpg" };
             recipeView_2.Instructions.AddRange(new List<InstructionViewModel>() { ins_3_1, ins_3_2, ins_3_3, ins_3_4, ins_3_5, ins_3_6, ins_3_7, ins_3_8, ins_3_9, ins_3_10, ins_3_11, ins_3_12, ins_3_13, ins_3_14 });
 
             serializedIngridients = JsonConvert.SerializeObject(recipeView_2.Ingridients);

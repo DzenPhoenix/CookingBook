@@ -43,8 +43,6 @@ namespace CookingBook.View
             InitDescription();
             InitAllComboBoxIngridient();
             InitAllInstructions();
-            this.mainPic = new FileInfo(@".\Res\pic\NoPic.png");
-            
         }
         private void InitAllComboBoxIngridient()
         {
@@ -77,7 +75,7 @@ namespace CookingBook.View
             border.Child = panel;
 
             Image image = new Image() { MaxWidth = 300, Stretch = Stretch.UniformToFill };
-            image.Source = new BitmapImage(new Uri(instructionView.ImageSource, UriKind.Relative));
+            image.Source = new BitmapImage(new Uri(instructionView.ImageSource, UriKind.RelativeOrAbsolute));
             panel.Children.Add(image);
 
             Button buttonAdd = new Button() { Content = "Add", FontSize = 20, Tag = image };
@@ -125,7 +123,9 @@ namespace CookingBook.View
         }
         private void InitMainPicture()
         {
-            this.imageMainPic.Source = new BitmapImage(new Uri(this.viewModel.MainPictureAdress,UriKind.Relative));
+            this.imageMainPic.BeginInit();
+            this.imageMainPic.Source = new BitmapImage(new Uri(this.viewModel.MainPictureAdress,UriKind.RelativeOrAbsolute));
+            this.imageMainPic.EndInit();
         }
         private void InitRecipeName()
         {
@@ -302,66 +302,43 @@ namespace CookingBook.View
 
         private void ButtonSaveRecipeClick(object sender, RoutedEventArgs e)
         {
-            RecipeViewModel recipeView = new RecipeViewModel();
-            recipeView.Name = this.textBoxRecipeName.Text;
-            recipeView.Category = this.comboBoxCategory.Text;
-            recipeView.Kitchen = this.comboBoxKitchen.Text;
-
-            DirectoryInfo parentDir = new DirectoryInfo(@".\Res\pic\");
-            DirectoryInfo directory = new DirectoryInfo(@".\Res\pic\0");
-            int count = parentDir.GetDirectories().Length;
-            for (int i = 1; i <= count + 1; i++)
+            RecipeViewModel recipeView = GetRecipeViewModelFrom(this);
+            using (CookingBookContext db = new CookingBookContext())
             {
-                directory = new DirectoryInfo(parentDir.FullName + i.ToString());
-                if (directory.Exists)
+                Recipe recipe = (from rec in db.Recipes
+                                 where rec.Name == recipeView.Name
+                                 select rec).FirstOrDefault();
+                recipe.MainPictureAdress = recipeView.MainPictureAdress;
+                recipe.Description = recipeView.Description;
+
+                int categoryId = (from category in db.Categories
+                                  where category.Name == recipeView.Category
+                                  select category.CategoryId).FirstOrDefault();
+
+                if (categoryId != 0)
                 {
-                    continue;
+                    recipe.CategoryId = categoryId;
                 }
                 else
                 {
-                    directory.Create();
-                    this.recipeDir = directory;
-                    break;
+                    recipe.Category = new Category() { Name = recipeView.Category };
                 }
-            }
-            this.mainPic = this.mainPic.CopyTo(directory.FullName + "\\" + this.mainPic.Name);
-            recipeView.MainPictureAdress = this.mainPic.FullName;
-            recipeView.Description = this.textBoxRecipeDesription.Text;
 
-            List<IngridientViewModel> ingridientViews = new List<IngridientViewModel>();
-            foreach (DockPanel panel in this.stackPanelIngridients.Children)
-            {
-                IngridientViewModel ingridient = new IngridientViewModel()
+                int kitchenId = (from kitchen in db.Kitchens
+                                 where kitchen.Name == recipeView.Kitchen
+                                 select kitchen.KitchenId).FirstOrDefault();
+                if (kitchenId != 0)
                 {
-                    Name = (panel.Children[0] as ComboBox).Text,
-                    Comment = "--" + (panel.Children[2] as TextBox).Text
-                };
-                ingridientViews.Add(ingridient);
-            }
-            recipeView.Ingridients = ingridientViews;
-
-            List<InstructionViewModel> instructionViews = new List<InstructionViewModel>();
-            int fileName = 0;
-            foreach (DockPanel dock in this.stackPanelInstrucions.Children)
-            {
-                fileName++;
-                Image image = ((dock.Children[0] as Border).Child as StackPanel).Children[0] as Image;
-                FileInfo imageFile = GetImageFile(image);
-                imageFile = imageFile.CopyTo(recipeDir + "\\" + fileName.ToString() + "." + imageFile.Extension);
-
-                InstructionViewModel instruction = new InstructionViewModel()
+                    recipe.KitchenId = kitchenId;
+                }
+                else
                 {
-                    Name = (dock.Children[2] as TextBox).Text,
-                    ImageSource = imageFile.FullName
-                };
-                instructionViews.Add(instruction);
-            }
-            recipeView.Instructions = instructionViews;
-
-            Recipe recipe = new Recipe(recipeView);
-            using (CookingBookContext db = new CookingBookContext())
-            {
-                db.Recipes.Add(recipe);
+                    recipe.Kitchen = new Kitchen() { Name = recipeView.Kitchen };
+                }
+                string serializedIngridients = JsonConvert.SerializeObject(recipeView.Ingridients);
+                string serializedInstructions = JsonConvert.SerializeObject(recipeView.Instructions);
+                recipe.SerializedIngridients = serializedIngridients;
+                recipe.SerializedInstructions = serializedInstructions;
                 db.SaveChanges();
             }
             this.Close();
@@ -371,13 +348,81 @@ namespace CookingBook.View
         {
             try
             {
-                string path = image.Source.ToString().Substring(8);
-                return new FileInfo(path);
+                string path = image.Source.ToString();
+                int index = path.IndexOf("Res");
+                FileInfo res = new FileInfo(@".\" + path.Substring(index));
+                return res;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return new FileInfo(@".\Res\pic\NoPic.png");
             }
+        }
+
+        private RecipeViewModel GetRecipeViewModelFrom(EditRecipe form)
+        {
+            RecipeViewModel recipeView = new RecipeViewModel();
+            recipeView.Name = form.textBoxRecipeName.Text;
+            recipeView.Category = form.comboBoxCategory.Text;
+            recipeView.Kitchen = form.comboBoxKitchen.Text;
+
+            form.imageMainPic.Source = new BitmapImage(new Uri(this.viewModel.MainPictureAdress, UriKind.Relative));
+            form.mainPic = GetImageFile(form.imageMainPic);
+            form.recipeDir = this.mainPic.Directory;
+
+            DirectoryInfo targetDirectory = new DirectoryInfo(recipeDir.FullName + "\\" + form.mainPic.Name);
+            if (form.mainPic.Directory.FullName != targetDirectory.Parent.FullName)
+            {
+                form.mainPic = this.mainPic.CopyTo(targetDirectory.FullName);
+            }
+            recipeView.MainPictureAdress = form.mainPic.FullName;
+            recipeView.Description = form.textBoxRecipeDesription.Text;
+
+            List<IngridientViewModel> ingridientViews = new List<IngridientViewModel>();
+            foreach (DockPanel panel in form.stackPanelIngridients.Children)
+            {
+                IngridientViewModel ingridient = new IngridientViewModel()
+                {
+                    Name = (panel.Children[0] as ComboBox).Text,
+                    Comment = (panel.Children[2] as TextBox).Text
+                };
+                if (ingridient.Name!=String.Empty)
+                {
+                    ingridientViews.Add(ingridient); 
+                }
+            }
+            recipeView.Ingridients = ingridientViews;
+
+            List<InstructionViewModel> instructionViews = new List<InstructionViewModel>();
+            int fileName = 0;
+            foreach (DockPanel dock in form.stackPanelInstrucions.Children)
+            {
+                fileName++;
+                Image image = ((dock.Children[0] as Border).Child as StackPanel).Children[0] as Image;
+                FileInfo imageFile = GetImageFile(image);
+                if (imageFile.Name != "NoPic.png")
+                {
+                    targetDirectory = new DirectoryInfo(recipeDir + "\\" + fileName.ToString() + "." + imageFile.Extension);
+                    if (imageFile.Directory.FullName != targetDirectory.Parent.FullName)
+                    {
+                        imageFile = imageFile.CopyTo(targetDirectory.FullName);
+                    }
+                }
+               
+                    
+                InstructionViewModel instruction = new InstructionViewModel()
+                {
+                    Name = (dock.Children[2] as TextBox).Text,
+                    ImageSource = imageFile.FullName
+                };
+                if (instruction.Name!=String.Empty && instruction.ImageSource!= @".\Res\pic\NoPic.png")
+                {
+                    instructionViews.Add(instruction); 
+                }
+            }
+            recipeView.Instructions = instructionViews;
+            return recipeView;
         }
     }
 }

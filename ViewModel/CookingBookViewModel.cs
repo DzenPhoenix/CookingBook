@@ -66,6 +66,11 @@ namespace CookingBook.ViewModel
 
         }
 
+        public void CookingBookViewModelInit()
+        {
+
+        }
+
         private List<RecipeViewModel> GetAllRecipes()
         {
             List<Recipe> recipes = new List<Recipe>();
